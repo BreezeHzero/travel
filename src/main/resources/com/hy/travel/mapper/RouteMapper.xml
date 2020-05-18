@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.travel.mapper.RouteMapper">
+    <select id="getTotalCount" parameterType="com.hy.travel.model.Route" resultType="int">
+      SELECT COUNT(cid) FROM tab_route WHERE 1=1
+      <if test="cid != 0">AND cid = #{cid}</if>
+      <if test='rname != null and rname != ""'>AND rname LIKE '%${rname}%'</if>
+    </select>
+
+    <select id="findByPage" resultType="com.hy.travel.model.Route">
+        SELECT * FROM tab_route WHERE 1=1
+        <if test="cid != 0">AND cid = #{cid}</if>
+        <if test='rname != null and rname != ""'>AND rname LIKE '%${rname}%'</if>
+        LIMIT #{start},#{pageSize}
+    </select>
+
+    <select id="findOne" resultType="com.hy.travel.model.Route">
+        SELECT * FROM tab_route WHERE rid = #{rid}
+    </select>
+
+    <select id="findCountByRid" resultType="int">
+        SELECT COUNT(*) FROM tab_favorite WHERE rid = #{rid}
+    </select>
+
+    <select id="randomSelect" resultType="com.hy.travel.model.Route">
+        SELECT t1.`rid`, t1.`rname`,t1.`price`,t1.`rimage`
+        FROM tab_route AS t1
+        JOIN (SELECT ROUND(RAND() * ((SELECT MAX(rid) FROM tab_route)-(SELECT MIN(rid) FROM tab_route))+(SELECT MIN(rid) FROM tab_route)) AS id FROM tab_route LIMIT 6) AS t2
+        ON t1.rid=t2.id
+        ORDER BY t1.rid LIMIT 6
+    </select>
+
+    <select id="randomSelect_theme" resultType="com.hy.travel.model.Route">
+        SELECT r.rid,r.`rname`,r.`price`,r.`rimage`
+        FROM tab_route AS r
+        WHERE r.`rname` LIKE '%陕西%'
+        ORDER BY RAND()
+        LIMIT 4
+    </select>
+
+    <select id="randomCheapTravel" resultType="com.hy.travel.model.Route">
+        SELECT r.rid,r.`rname`,r.`price`,r.`rimage`
+        FROM tab_route AS r
+        WHERE r.price &lt; 900
+        ORDER BY RAND()
+        LIMIT 6
+    </select>
+</mapper>

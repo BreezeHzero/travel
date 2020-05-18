@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>订单系统样式</title>
+<link href="css/style03.css" rel="stylesheet" type="text/css">
+<link href="css/form.css" rel="stylesheet" type="text/css">
+
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="https://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+
+<!--[if lte IE 6]>
+<script type="text/javascript" src="./js/order/DD_belatedPNG_0.0.8a.js"></script>
+<script type="text/javascript">
+  DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+</head>
+
+<body style="padding: 0; margin: auto;">
+
+<div id="bg_order" style="width: 700px;height: 30px">
+
+</div>
+<div class="iDo-main" >
+<form class="registerform" target="_blank" action="#">
+	<div class="iDo-title"></div>
+	<div class="iDo-list">
+		<ul class="iDo-list-ul">
+			<li class="iDo-list-li-title">
+				<div class="iDo-list-li-d1">选择</div>
+				<div class="iDo-list-li-d2">商品名称</div>
+				<div class="iDo-list-li-d3">商品单价</div>
+				<div class="iDo-list-li-d4">人数</div>
+				<div class="iDo-list-li-d5">小计</div>
+			</li>
+			<li class="iDo-list-li">
+				<div class="iDo-list-li-d1"><input type="checkbox" id="iDo-product-1" price="0" name="p1" datatype="*"></div>
+				<div class="iDo-list-li-d2"><label for="iDo-product-1" id="rname" >xxx旅游</label></div>
+				<div class="iDo-list-li-d3"><label for="iDo-product-1" id="price">¥400元</label></div>
+				<div class="iDo-list-li-d4"><span id="p1" class="Spinner"></span></div>
+				<div class="iDo-list-li-d5"><label for="iDo-product-1" class="subtotal" >¥<i id="payment">400</i>元</label></div>
+			</li>
+
+			<li class="iDo-list-li-count"><i class="iDo-info-tips">暂无优惠~</i><span></span><em>商品总价：</em><em class="iDo-cl"></em></li>
+		</ul>
+	</div>
+	<div class="iDo-basic">
+		<p class="iDo-info-p">
+			<span class="iDo-info-title">姓　　名：</span>
+			<span class="iDo-info-box"><input type="text" name="name" datatype="zh2-4" class="txt-len-1" id="name" nullmsg="请填写收货人姓名。"></span>
+			<span class="iDo-info-tips"><i><em>*</em>请填写收货人姓名。</i></span>
+			<span class="iDo-cl"></span>
+		</p>
+		<p class="iDo-info-p">
+			<span class="iDo-info-title">手　　机：</span>
+			<span class="iDo-info-box"><input type="text" datatype="m" name="telephone" class="txt-len-1" id="telephone" nullmsg="请填写收货联系方式。"></span>
+			<span class="iDo-info-tips"><i><em>*</em>请填写收货联系方式。</i></span>
+			<span class="iDo-cl"></span>
+		</p>
+		<p class="iDo-info-p">
+			<span class="iDo-info-title">订单号：</span>
+			<span class="iDo-info-tips" id="order_num"><i>s45f465sd4f</i></span>
+			<span class="iDo-cl"></span>
+		</p>
+		<p class="iDo-info-p">
+			<span class="iDo-info-title">选择省市：</span>
+			<span class="iDo-info-box iDo-info-select">
+				<label id="province"><select class="txt-len-4" id="iDo-province"><option>--请选择--</option></select></label><span class="iDo-sc"></span>
+				<label id="city"><select class="txt-len-5" id="iDo-city"><option>--请选择--</option></select></label><span class="iDo-sc"></span>
+				<label id="county"><select class="txt-len-6" id="iDo-county"><option>--请选择--</option></select></label>
+			</span>
+			<span class="iDo-info-tips"><i><em>*</em>请选择收货省市信息。</i></span>
+			<span class="iDo-cl"></span>
+		</p>
+		<p class="iDo-info-p">
+			<span class="iDo-info-title">详细地址：</span>
+			<span class="iDo-info-box"><input type="text" name="name" class="txt-len-7"></span>
+			<span class="iDo-info-tips"><i><em>*</em></i></span>
+			<span class="iDo-cl"></span>
+		</p>
+	</div>
+	<div class="iDo-details">
+		<p class="iDo-info-p">
+			<span class="iDo-info-title">付款方式：</span>
+			<span class="iDo-info-box">
+				<span class="iDo-pay"><input type="radio" id="iDo-pay-2" name="name" checked><label class="iDo-pay-2" for="iDo-pay-2">支付宝付款</label></span>
+				<span class="iDo-pay"><input type="radio" id="iDo-pay-3" name="name"><label class="iDo-pay-3" for="iDo-pay-3">网银付款</label></span>
+			</span>
+			<span class="iDo-cl"></span>
+		</p>
+		<p class="iDo-info-p">
+			<span class="iDo-info-title">备注：</span>
+			<span class="iDo-info-box"><input type="text" name="name" class="txt-len-7"></span>
+			<span class="iDo-info-tips"><i><em>*</em></i></span>
+			<span class="iDo-cl"></span>
+		</p>
+	</div>
+	<input type="button" value="返回" id="back"/>
+	<input type="button" value="确认提交" id="confirmOrder"/>
+</form>
+</div>
+<div class="iDo-side">
+	<div class="iDo-side-tel iDo-side-bg">
+		<div class="iDo-side-icon">
+			<span>全国免费订购咨询热线</span>
+			<strong>155-0360-9387</strong>
+		</div>
+	</div>
+	<div class="iDo-side-hours iDo-side-bg">
+		<div class="iDo-side-icon">
+			<span>营业时间</span>
+			<strong>8:00-23:00</strong>
+		</div>
+	</div>
+	<div class="iDo-side-tips">
+		<div class="iDo-side-icon">温馨提示</div>
+		<div class="iDo-side-tips-contents">
+			1.提交订单后，请尽快支付；<br>
+			2.如果没有时间预约，请联系客服；<br>
+			3.为了保证您的权益，我们提供工商举报电话123456；<br>
+			4.提交一次性订单后，将不再支付其他金额。
+		</div>
+	</div>
+	<div class="iDo-side-btn">
+		<a href="#"></a>
+	</div>
+	<div class="iDo-side-sale">
+	</div>
+</div>
+
+<script type="text/javascript" src="./js/order/common.js"></script>
+<script type="text/javascript" src="./js/order/jquery.Form.js"></script>
+<script type="text/javascript" src="./js/order/jquery.Area.js"></script>
+<script type="text/javascript" src="./js/order/jquery.Spinner.js"></script>
+<script type="text/javascript" src="./js/order/jquery.Validform.js"></script>
+<script src="./js/getParameter.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".iDo-main:last").Validform({tiptype:3});  //就这一行代码！下面是演示两种不同的验证效果;
+});
+
+	$(function () {
+        var rid = getParameter("rid");
+        checkOrderInfo(rid);
+        $.getJSON('user/findSingleUser',{},function(data){
+            var msg = data.username + '的订单：';
+            $("#bg_order").html(msg);
+            $("#name").val(data.name);
+            $("#telephone").val(data.telephone);
+        });
+
+        //查订单号
+        $.getJSON("order/findOrder_num",{},function(data){
+			$("#order_num").html(data.order_num);
+		});
+
+
+        $("#confirmOrder").click(function(){
+            // var rid = getParameter("rid");
+            var payment = document.getElementById("iDo-product-1").getAttribute("price");
+            var peoCount = localStorage.getItem("c");
+            $.getJSON("order/confirmOrder",{
+                payment:payment,
+                peoCount:peoCount
+            },function (data) {
+                if(data){
+                    alert("支付成功！");
+                    localStorage.removeItem("c");
+                    location.href="route_detail.html?rid="+rid;
+                }else{
+                    alert("支付失败~");
+                    return;
+                }
+            });
+        });
+
+        $("#back").click(function(){
+            var flag = confirm("确定放弃订单？");
+            if(flag){
+                $.getJSON("order/back",{},function(data){
+                    location.href="route_detail.html?rid="+rid;
+				});
+            }else{
+                return;
+            }
+        });
+
+    });
+
+	//查询用户所选的信息
+	function checkOrderInfo(ridU) {
+        var rid = ridU;
+        $.getJSON("route/findOne",{
+            rid:rid
+        },function(data){
+            var rrname = data.rname.substr(0,10) + "...";
+            document.getElementById("iDo-product-1").setAttribute("price",data.price);
+            $("#rname").html(rrname);
+            $("#price").html('¥'+data.price + '元');
+            // $("#payment").html(data.price);
+        });
+    }
+</script>
+</body>
+
+</body>
+</html>

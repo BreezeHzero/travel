@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.travel.mapper.FavoriteMapper">
+    <select id="findFavoriteByUidAndRid" resultType="com.hy.travel.model.Favorite">
+        SELECT * FROM tab_favorite WHERE uid = #{uid} AND rid = #{rid}
+    </select>
+
+    <insert id="insertFavorite">
+        INSERT INTO tab_favorite VALUES(#{rid},NOW(),#{uid})
+    </insert>
+
+    <delete id="deleteFavorite">
+        DELETE FROM tab_favorite WHERE rid = #{rid} AND uid = #{uid}
+    </delete>
+
+    <select id="findMyFavorite" resultType="com.hy.travel.model.MyFavorite">
+        SELECT DISTINCT(r.rid),r.`rimage`,r.`rname`,r.`price`,f.`date` FROM tab_favorite AS f
+        INNER JOIN tab_route AS r
+        ON f.`rid` = r.`rid`
+        INNER JOIN tab_route_img AS r_i
+        ON r.`rid` = r_i.`rid`
+        WHERE f.`uid` = #{uid}
+        LIMIT #{start},#{pageSize}
+    </select>
+
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM tab_favorite WHERE uid = #{uid}
+    </select>
+
+    <select id="findFavoriteNum" resultType="com.hy.travel.model.MyFavorite">
+        SELECT f.rid,r.`rname`,r.`price`,r.`rimage`,COUNT(DISTINCT(f.uid)) AS num
+        FROM tab_favorite f
+        INNER JOIN tab_route r
+        ON f.`rid` = r.`rid`
+        WHERE 1=1
+        <if test='rname != null and rname != ""'>AND r.`rname`  LIKE '%${rname}%'</if>
+        <if test='gt_price != 0.0'>AND r.`price` &gt;= #{gt_price}</if>
+        <if test='lt_price != 0.0'>AND r.`price` &lt;= #{lt_price}</if>
+        GROUP BY f.rid
+        ORDER BY num DESC
+        LIMIT #{start},#{pageSize}
+    </select>
+
+    <select id="getFavoriteTotalCount" resultType="int">
+        SELECT COUNT(DISTINCT(f.`rid`))
+        FROM tab_favorite f
+        INNER JOIN tab_route r
+        ON f.`rid` = r.`rid`
+        WHERE 1=1
+        <if test='rname != null and rname != ""'>AND r.`rname` LIKE '%${rname}%'</if>
+        <if test='gt_price != 0.0'>AND r.`price` &gt;= #{gt_price}</if>
+        <if test='lt_price != 0.0'>AND r.`price` &lt;= #{lt_price}</if>
+    </select>
+
+    <select id="randFind" resultType="com.hy.travel.model.MyFavorite">
+        SELECT f.rid,r.`rname`,r.`price`,r.`rimage`,COUNT(DISTINCT(f.uid)) AS num
+        FROM tab_favorite AS f
+        INNER JOIN tab_route r
+        ON f.`rid` = r.`rid`
+        GROUP BY f.rid
+        ORDER BY RAND()
+        LIMIT 4
+    </select>
+</mapper>

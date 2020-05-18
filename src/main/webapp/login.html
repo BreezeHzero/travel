@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>说走就走旅游网-登录</title>
+	<link rel="shortcut icon" href="img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<!--导入angularJS文件-->
+    <!--<script src="js/angular.min.js"></script>-->
+	<!--导入jquery-->
+	<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+		//点击登录
+		$(function(){
+            $("#bt_login").click(function(){
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var check = $("#check").val();
+
+                login(username, password, check);
+            });
+		});
+		//判断是否勾选记住密码
+		/*$(function(){
+		    //如果点击了记住密码，给cookie设置键值
+		    $("#checkbox").click(function(){
+		     	   if($(this).is(":checked")){
+					   alert("记住密码");
+
+				   }else{
+		     	       alert("没记住密码");
+				   }
+			});
+		});*/
+
+		function login(username,password,check){
+            $.getJSON('user/findSingleUser',{},function(user){
+                var remember_me = $("#checkbox").is(":checked");
+                //如果在session中找到了登录的用户信息，则提示
+                if(user){
+                    //如果session中有用户则进行提示,,换成弹窗Y/N
+                    //alert("是否退出当前用户，登录新用户");
+                    var tip = confirm("是否退出当前用户，登录新用户");
+
+                    if(tip == true){
+                        /*$.post("http://localhost:8881/travel_community/user/login",{
+                            'username':username,
+                            'password':password
+						},function(data){
+                            console.log("成功");
+						});*/
+                        //确认后执行...
+                        $.getJSON('user/login',{
+                            'username':username,
+                            'password':password,
+                            'check':check,
+							'remember_me':remember_me//true记住，false不记住
+                        },function(data){
+                            //判断用户是否重复登录同一账号
+                            // if(data.uid == user.uid){
+                            // 	alert("您以登录，无需再次登录");
+                            //     location.href="index.html";
+                            // }
+                            if(data.flag){
+                                //查询到用户信息，且填写了验证码，登录成功
+                                location.href="index.html";
+                            }else{
+                                if($("#errorMsg").css("display") == 'none'){
+                                    $("#errorMsg").css("display","block");
+                                }
+                                //刷新验证码，并提示
+                                $("#errorMsg").html(data.errorMsg);
+                                document.getElementById("img_check").src="checkCode?"+new Date().getTime();
+                            }
+                        });
+                    }else{
+                        //取消后执行...
+                        alert("登录失败！");
+                        $("#username").val("");
+                        $("#password").val("");
+                        $("#check").val("");
+                    }
+
+                }else{
+                    /*$.getJSON("http://localhost:8887/user/login",{
+                        'username':username,
+                        'password':password
+                    },function(data){
+                        console.log("成功");
+                    });*/
+
+
+                    /*$.ajax({
+                        type:"get",
+                        async:false,
+                        url:"http://localhost:8881/travel_community/user/login",
+                        dataType:"json",
+						data:{
+                            "username":username,
+							"password":password
+						},
+                        success:function(data){
+                            alert("成功");
+                        },
+                        error:function () {
+                            alert("error");
+                        }
+                    });*/
+
+
+                    //没有用户信息，就直接登录
+                    $.getJSON('user/login',{
+                        'username':username,
+                        'password':password,
+                        'check':check,
+                        'remember_me':remember_me
+                    },function(data){
+                        if(data.flag){
+                            //查询到用户信息，且填写了验证码，登录成功
+                            location.href="index.html";
+                        }else{
+                            if($("#errorMsg").css("display") == 'none'){
+                                $("#errorMsg").css("display","block");
+                            }
+                            //刷新验证码，并提示
+                            $("#errorMsg").html(data.errorMsg);
+                            document.getElementById("img_check").src="checkCode?"+new Date().getTime();
+                        }
+                    });
+                }
+            });
+		}
+	</script>
+</head>
+
+<body>
+<!--引入头部-->
+<div id="header"></div>
+    <!-- 头部 end -->
+    <section id="login_wrap">
+        <div class="fullscreen-bg" style="background: url(images/login_bg.png);height: 532px;">
+        	
+        </div>
+        <div class="login-box">
+        	<div class="title">
+        		<img src="" alt="">
+        		<span>Here We Go!</span>
+        	</div>
+        	<div class="login_inner">
+				
+				<!--登录错误提示消息-->
+        		<div id="errorMsg" class="alert alert-danger" style="display: none"></div>
+				<form id="loginForm" action="" method="post" accept-charset="utf-8">
+        			<input type="hidden" name="action" value="login"/>
+					<input name="username" type="text" id="username" placeholder="请输入账号" autocomplete="off">
+        			<input name="password" type="password" id="password" placeholder="请输入密码" autocomplete="off">
+        			<div class="verify">
+					<input name="check" type="text" id="check" placeholder="请输入验证码" autocomplete="off">
+					<span><img src="checkCode" id="img_check" alt="" onclick="changeCheckCode(this)"></span>
+					<script type="text/javascript">
+						//图片点击事件
+						function changeCheckCode(img) {
+							img.src="checkCode?"+new Date().getTime();
+						}
+					</script>
+			</div>
+			<div class="submit_btn">
+        				<button type="button" id="bt_login">登录</button>
+        				<div class="auto_login">
+        					<input type="checkbox" name="" class="checkbox" id="checkbox">
+        					<span>记住密码</span>
+        				</div>        				
+        			</div>        			       		
+        		</form>
+        		<div class="reg">没有账户？<a href="javascript:location.href='register.html'">立即注册</a></div>
+        	</div>
+        </div>
+    </section>
+    <!--引入尾部-->
+<div class="footer-box">
+	<div class="footer-container">
+		<div class="footer-service clearfix">
+			<div class="footer-service-item footer-icon-001">
+				<i></i>
+				<span>专注于旅游产业领域</span>
+			</div>
+			<div class="footer-service-item footer-icon-002">
+				<i></i>
+				<span>国内资深导游专家</span>
+			</div>
+			<div class="footer-service-item footer-icon-003">
+				<i></i>
+				<span>一对一热心客服热线</span>
+			</div>
+			<div class="footer-service-item footer-icon-004">
+				<i></i>
+				<span>数百万用户诚意推荐</span>
+			</div>
+		</div>
+		<div class="footer-line"></div>
+		<div class="footer-links clearfix">
+			<dl class="footer-article-item">
+				<dt>旗下品牌</dt>
+				<dd>
+					<a href="https://www.fliggy.com/">飞猪</a>
+				</dd>
+				<dd>
+					<a href="https://www.ctrip.com/">携程</a>
+				</dd>
+				<dd>
+					<a href="https://www.qunar.com">去哪儿</a>
+				</dd>
+			</dl>
+			<dl class="footer-article-item">
+				<dt>关于我们</dt>
+				<dd>
+					<a href="javascript:void(0);">公司介绍</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">发展历程</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">团队风采</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">办公环境</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">荣誉资质</a>
+				</dd>
+				<dd>
+					<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">联系我们</a>
+				</dd>
+			</dl>
+			<dl class="footer-article-item">
+				<dt>精品推荐</dt>
+				<dd>
+					<a href="javascript:void(0);">施展旅游</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">华山一日</a>
+				</dd>
+				<dd>
+					<a href="javascript:void(0);">全国游</a>
+				</dd>
+			</dl>
+			<dl class="footer-article-item">
+				<dt>其他</dt>
+				<dd>
+					<a href="https://xiaotiancode.top">官方论坛</a>
+				</dd>
+				<dd>
+					<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">服务支持</a>
+				</dd>
+				<dd>
+					<a href="#">电商大会</a>
+				</dd>
+				<dd>
+					<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">投诉建议</a>
+				</dd>
+				<dd>
+					<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">支付方式</a>
+				</dd>
+			</dl>
+			<dl class="footer-contact-item">
+				<h3>联系我们</h3>
+				<p>155-0360-9387</p>
+				<div class="footer-ewm">
+					<img src="images/wexin.png" alt="">
+					<p>关注我的微信</p>
+				</div>
+			</dl>
+		</div>
+		<div class="footer-friend">
+			<div class="footer-friend-title">友情链接：</div>
+			<ul class="footer-friend-title-list clearfix">
+				<li>
+					<a href="http://xiaotiancode.top">李创搏的论坛</a>
+				</li>
+				<li>
+					<a href="https://www.baidu.com/">百度</a>
+				</li>
+				<li>
+					<a href="https://blog.csdn.net/">CSDN</a>
+				</li>
+				<li>
+					<a href="http://www.yits003.com">云南旅游社团</a>
+				</li>
+				<li>
+					<a href="https://www.githubs.cn/">github</a>
+				</li>
+				<li>
+					<a href="https://gitee.com">git</a>
+				</li>
+				<li>
+					<a href="http://www.jq22.com">JQuery插件</a>
+				</li>
+				<li>
+					<a href="https://www.runoob.com/">菜鸟教程</a>
+				</li>
+				<li>
+					<a href="https://trade.taobao.com">淘宝</a>
+				</li>
+				<li>
+					<a href="https://www.huaweicloud.com">华为云</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);">移动商城购物</a>
+				</li>
+
+			</ul>
+			<a href="javascript:void(0);" class="footer-friend-more">更多 >></a>
+		</div>
+		<div class="footer-copyright">
+			<p>© 2020-2020 (wegotravel.com) 版权所有，并保留所有权利&nbsp;&nbsp;&nbsp;常年法律顾问: （陕西）不管用律师事务所</p>
+			<p style="margin: auto;">
+				陕西省宝鸡市胡了路16号看守所&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#">
+					<img style="margin: auto" src="images/icon-footer.png" alt="">**网安备 0008899999xxxx号
+				</a>
+			</p>
+		</div>
+	</div>
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!--导入布局js，共享header和footer-->
+    <script type="text/javascript" src="js/include.js"></script>
+    <script>
+        //监听回车
+        $("#username, #password, #check").bind("keyup", function (e) {
+            if (e.keyCode == 13) {
+                $('#bt_login').click();
+            }
+        });
+	</script>
+</body>
+
+</html>

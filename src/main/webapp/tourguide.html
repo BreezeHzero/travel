@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>旅游管家</title>
+    <link rel="shortcut icon" href="img/favicon.png">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/ranking-list.css">
+    <link rel="stylesheet" type="text/css" href="css/public.css" />
+    <link rel="stylesheet" type="text/css" href="css/index02.css" />
+    <link rel="stylesheet" type="text/css" href="css/tanchuang.css" />
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+    <!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+    <style>
+        .banner-text{
+            /*position: relative;*/
+            width: 1200px;
+            height: 100px;
+            margin: 0 auto;
+            padding-left: 300px;
+        }
+        .banner-text .banner_left{
+            /*float: left;*/
+            width: 690px;
+        }
+        .banner-text .banner_left .h1{
+            line-height: 1.1;
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #544641;
+            margin-top: 24px;
+        }
+        .banner-text .banner_left p{
+            font-size: 14px;
+            font-weight: 100;
+            color: #918682;
+            margin-top: 10px;
+        }
+        .banner-text .banner_right{
+            float: right;
+            font-weight: bold;
+            font-size: 16px;
+            font-weight: 300;
+            margin-top: -58px;
+            color: #ffffff;
+            display: block;
+            text-align: center;
+            line-height: 44px;
+            width: 176px;
+            height: 44px;
+            background-color: #63c6c2;
+            border-radius: 35px;
+            text-decoration: none;
+        }
+        .jx_content img{
+            width: 585px;
+            margin-left: 50px;
+            border-radius: 5px;
+
+        }
+
+        .has_border h3{
+            text-align: center;
+            display: block;
+            padding: 10px;
+            color: #595757;
+            font-weight: 500;
+            font-size: 18px;
+        }
+        .has_border h2{
+            display: block;
+            width: 585px;
+            color: #595757;
+            font-size: 14px;
+        }
+        .jx_content a{
+            text-decoration:none;
+        }
+
+        body *,
+        body *:before,
+        body *:after {
+            box-sizing: inherit;
+        }
+        .box {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            /*border: 1px solid currentcolor;*/
+            border-radius: 3px;
+            font-size: 60px;
+            color: rgba(247, 238, 214, 1);
+            padding: 1em;
+            margin-bottom: .25em;
+            vertical-align: top;
+            -webkit-transition: .3s color, .3s border;
+            transition: .3s color, .3s border;
+        }
+        [class*="loader-"] {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            color: inherit;
+            vertical-align: middle;
+            pointer-events: none;
+        }
+        .loader-14 {
+            border-radius: 50%;
+            box-shadow: 0 1em 0 -.2em currentcolor;
+            position: relative;
+            -webkit-animation: loader-14 0.8s ease-in-out alternate infinite;
+            animation: loader-14 0.8s ease-in-out alternate infinite;
+            -webkit-animation-delay: 0.32s;
+            animation-delay: 0.32s;
+            top: -1em;
+        }
+        .loader-14:after,
+        .loader-14:before {
+            content: '';
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            border-radius: inherit;
+            box-shadow: inherit;
+            -webkit-animation: inherit;
+            animation: inherit;
+        }
+        .loader-14:before {
+            left: -1em;
+            -webkit-animation-delay: 0.48s;
+            animation-delay: 0.48s;
+        }
+        .loader-14:after {
+            right: -1em;
+            -webkit-animation-delay: 0.16s;
+            animation-delay: 0.16s;
+        }
+        @-webkit-keyframes loader-14 {
+            0% {
+                box-shadow: 0 2em 0 -.2em currentcolor;
+            }
+            100% {
+                box-shadow: 0 1em 0 -.2em currentcolor;
+            }
+        }
+        @keyframes loader-14 {
+            0% {
+                box-shadow: 0 2em 0 -.2em currentcolor;
+            }
+            100% {
+                box-shadow: 0 1em 0 -.2em currentcolor;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!--引入头部-->
+    <div id="header"></div>
+
+    <section id="banner">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="2000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <!--<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img width="100%" src="images/1423485341381.jpg" alt="">
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
+    <!--弹窗-->
+    <div class="beijingzhezhao" id="beijingzhezhao"></div>
+    <div class="zhezhao" id='zhezhao'>
+        <div class="tankuang">
+            <div class="header2" id="header2">
+                <div class="header-right" id="header-right" onclick="hidder()">x</div>
+                <div id="half_bg">
+                    <div class="card-profile_visual"></div>
+                    <div class="card-profile_user-infos">
+                        <span class="infos_name">【张三】</span>
+                        <span class="infos_nick">一个人，一条路，人在途中，心随景动，从起点，到尽头，也许快乐，或有时孤独，如果心在远方，只需勇敢前行，梦想自会引路，有多远，走多远，把足迹连成生命线。</span>
+                    </div>
+                </div>
+                <div id="half_info">
+                    <dl>
+                        <dt>电话：<span>15503609387</span></dt>
+                        <dt>邮箱：<span>hy279801800@163.com</span></dt>
+                        <dt>状态：<span>工作中~</span></dt>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="content">
+        <section class="hemai_jx">
+            <div class="banner-text">
+                <div class="banner_left">
+                    <div class="h1">旅行定制师，让你的旅行更省心</div>
+                    <p>提出你对旅行的期待和要求，剩下的就交给我们吧。</p>
+                    <a class="banner_right" href="ChatMain.html">聊聊吧</a>
+                </div>
+            </div>
+
+            <!--轮播-->
+            <div class="lb_gl">
+                <div class="container">
+                    <h1 class="turn_3d">挑选适合你的导游吧~</h1>
+
+
+                    <div class="pictureSlider poster-main">
+                        <!--延迟-->
+                        <div class="box">
+                            <div class="loader-14"></div>
+                        </div>
+
+                        <div class="poster-btn poster-prev-btn"></div>
+
+                        <ul id="zturn" class="poster-list">
+                            <li class="poster-item  zturn-item" >
+                                <p class="xxgy">寄语</p>
+                                <p class="say">明月几时有</p>
+                                <div class="for_btn">
+                                    <a href="javascript:void(0)"><img src="images/1423485341381.jpg" width="100%"></a>
+                                    <!--<a href="#" class="in_page"><img src="images/iconin.png" /></a>-->
+                                </div>
+
+                                <div class="students_star">
+                                    <p class="cell_list"><span class="lf">姓名：<span class="darks">小明</span></span> <span class="rt">年龄 ：<span class="darks">25</span></span>
+                                    </p>
+                                    <p class="cell_list"><span class="lf">职龄：<span class="darks">1年</span></span> <span class="rt">状态：<span class="darks">空闲</span></span>
+                                    </p>
+                                    <div class="zwjs">
+                                        自我介绍是向别人展示你自我介绍好不好,甚至直接关系到你给别人的第一印象的好坏及以后自我介绍是向别人展示你自我介绍好不好
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="poster-item zturn-item">
+                                <p class="xxgy">寄语</p>
+                                <p class="say">明月几时有</p>
+                                <div class="for_btn">
+                                    <a href="javascript:void(0)" onclick="dianwo()"><img src="images/1545124726231.jpg" width="100%"></a>
+                                    <!--<a href="#" class="in_page"><img src="images/iconin.png" /></a>-->
+                                </div>
+                                <div class="students_star">
+                                    <p class="cell_list"><span class="lf">姓名：<span class="darks">小明</span></span> <span class="rt">年龄 ：<span class="darks">25</span></span>
+                                    </p>
+                                    <p class="cell_list"><span class="lf">职龄：<span class="darks">1年</span></span> <span class="rt">状态：<span class="darks">空闲</span></span>
+                                    </p>
+                                    <div class="zwjs">
+                                        自我介绍是向别人展示你自我介绍好不好,甚至直接关系到你给别人的第一印象的好坏及以后自我介绍是向别人展示你自我介绍好不好
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="poster-item zturn-item">
+                                <p class="xxgy">寄语</p>
+                                <p class="say">明月几时有</p>
+                                <div class="for_btn">
+                                    <a href="javascript:void(0)" onclick="dianwo()"><img src="images/1600284538343.jpg" width="100%"></a>
+                                    <!--<a href="#" class="in_page"><img src="images/iconin.png" /></a>-->
+                                </div>
+                                <div class="students_star">
+                                    <p class="cell_list"><span class="lf">姓名：<span class="darks">小明</span></span> <span class="rt">年龄 ：<span class="darks">25</span></span>
+                                    </p>
+                                    <p class="cell_list"><span class="lf">职龄：<span class="darks">1年</span></span> <span class="rt">状态：<span class="darks">空闲</span></span>
+                                    </p>
+                                    <div class="zwjs">
+                                        自我介绍是向别人展示你自我介绍好不好,甚至直接关系到你给别人的第一印象的好坏及以后自我介绍是向别人展示你自我介绍好不好
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="poster-item zturn-item" >
+                                <p class="xxgy">寄语</p>
+                                <p class="say">明月几时有</p>
+                                <div class="for_btn">
+                                    <a href="javascript:void(0)" onclick="dianwo()"><img src="images/1605534974708.jpg" width="100%"></a>
+                                    <!--<a href="#" class="in_page"><img src="images/iconin.png" /></a>-->
+                                </div>
+                                <div class="students_star">
+                                    <p class="cell_list"><span class="lf">姓名：<span class="darks">小明</span></span> <span class="rt">年龄 ：<span class="darks">25</span></span>
+                                    </p>
+                                    <p class="cell_list"><span class="lf">职龄：<span class="darks">1年</span></span> <span class="rt">状态：<span class="darks">空闲</span></span>
+                                    </p>
+                                    <div class="zwjs">
+                                        在云南，就有这样的魔力，让每个到这里的人，在回味人生的同时，感受生活的另一种状态，邂逅一份独特的美。旅行旅行，风土人情，我是咪哆，一个土生土长的大理白族姑娘，我来给您诉说白族的风土人情！在这里，时光仿佛慢得像手中的丝线一样，细细又绵长。这里的一花一草，一山一水，都能让人的灵魂变得平和安宁在这里，没有城市的快节奏，没有那么多方案和报表要做，没有戴着面具的各种饭局需要应对在这里，你会发现，交友可以通过一杯酒就掏心掏肺，饭也可以蹭的，酒也可以坐在青石板上吹瓶子，地摊也可以摆在大石桥上吆喝。。。。在这里有人找回了快乐，有人找回了自由。但无论是“上关风吹着下关花”，还是“洱海月映着苍山雪”，那些走过的风景，留下的影像，都会成为我们记忆中，最温暖的光。云南，张开它温柔的怀抱，拥抱着每一个有故事的人，它有独特的魅力，抚平每个游子心中的创伤，让我们可以邂逅一个全新的自己，在一个陌生的地方，和一个陌生的我相逢。</div>
+                                </div>
+                            </li>
+
+                            <li class="poster-item zturn-item">
+                                <p class="xxgy">寄语</p>
+                                <p class="say">明月几时有</p>
+                                <div class="for_btn">
+                                    <a href="javascript:void(0)" onclick="dianwo()"><img src="images/1607203688490.jpg" width="100%"></a>
+                                    <!--<a href="#" class="in_page"><img src="images/iconin.png" /></a>-->
+                                </div>
+                                <div class="students_star">
+                                    <p class="cell_list"><span class="lf">姓名：<span class="darks">小明</span></span> <span class="rt">年龄 ：<span class="darks">15k</span></span>
+                                    </p>
+                                    <p class="cell_list"><span class="lf">职龄：<span class="darks">1年</span></span> <span class="rt">状态：<span class="darks">空闲</span></span>
+                                    </p>
+                                    <div class="zwjs">
+                                        自我介绍是向别人展示你自我介绍好不好,甚至直接关系到你给别人的第一印象的好坏及以后自我介绍是向别人展示你自我介绍好不好
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+
+
+
+    <!--导入底部-->
+    <div class="footer-box">
+        <div class="footer-container">
+            <div class="footer-service clearfix">
+                <div class="footer-service-item footer-icon-001">
+                    <i></i>
+                    <span>专注于旅游产业领域</span>
+                </div>
+                <div class="footer-service-item footer-icon-002">
+                    <i></i>
+                    <span>国内资深导游专家</span>
+                </div>
+                <div class="footer-service-item footer-icon-003">
+                    <i></i>
+                    <span>一对一热心客服热线</span>
+                </div>
+                <div class="footer-service-item footer-icon-004">
+                    <i></i>
+                    <span>数百万用户诚意推荐</span>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-links clearfix">
+                <dl class="footer-article-item">
+                    <dt>旗下品牌</dt>
+                    <dd>
+                        <a href="https://www.fliggy.com/">飞猪</a>
+                    </dd>
+                    <dd>
+                        <a href="https://www.ctrip.com/">携程</a>
+                    </dd>
+                    <dd>
+                        <a href="https://www.qunar.com">去哪儿</a>
+                    </dd>
+                </dl>
+                <dl class="footer-article-item">
+                    <dt>关于我们</dt>
+                    <dd>
+                        <a href="javascript:void(0);">公司介绍</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">发展历程</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">团队风采</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">办公环境</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">荣誉资质</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">联系我们</a>
+                    </dd>
+                </dl>
+                <dl class="footer-article-item">
+                    <dt>精品推荐</dt>
+                    <dd>
+                        <a href="javascript:void(0);">施展旅游</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">华山一日</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">全国游</a>
+                    </dd>
+                </dl>
+                <dl class="footer-article-item">
+                    <dt>其他</dt>
+                    <dd>
+                        <a href="https://xiaotiancode.top">官方论坛</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">服务支持</a>
+                    </dd>
+                    <dd>
+                        <a href="#">电商大会</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">投诉建议</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">支付方式</a>
+                    </dd>
+                </dl>
+                <dl class="footer-contact-item">
+                    <h3>联系我们</h3>
+                    <p>155-0360-9387</p>
+                    <div class="footer-ewm">
+                        <img src="images/wexin.png" alt="">
+                        <p>关注我的微信</p>
+                    </div>
+                </dl>
+            </div>
+            <div class="footer-friend">
+                <div class="footer-friend-title">友情链接：</div>
+                <ul class="footer-friend-title-list clearfix">
+                    <li>
+                        <a href="http://xiaotiancode.top">李创搏的论坛</a>
+                    </li>
+                    <li>
+                        <a href="https://www.baidu.com/">百度</a>
+                    </li>
+                    <li>
+                        <a href="https://blog.csdn.net/">CSDN</a>
+                    </li>
+                    <li>
+                        <a href="http://www.yits003.com">云南旅游社团</a>
+                    </li>
+                    <li>
+                        <a href="https://www.githubs.cn/">github</a>
+                    </li>
+                    <li>
+                        <a href="https://gitee.com">git</a>
+                    </li>
+                    <li>
+                        <a href="http://www.jq22.com">JQuery插件</a>
+                    </li>
+                    <li>
+                        <a href="https://www.runoob.com/">菜鸟教程</a>
+                    </li>
+                    <li>
+                        <a href="https://trade.taobao.com">淘宝</a>
+                    </li>
+                    <li>
+                        <a href="https://www.huaweicloud.com">华为云</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">移动商城购物</a>
+                    </li>
+
+                </ul>
+                <a href="javascript:void(0);" class="footer-friend-more">更多 >></a>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2020-2020 (wegotravel.com) 版权所有，并保留所有权利&nbsp;&nbsp;&nbsp;常年法律顾问: （陕西）不管用律师事务所</p>
+                <p style="margin: auto;">
+                    陕西省宝鸡市胡了路16号看守所&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#">
+                        <img style="margin: auto" src="images/icon-footer.png" alt="">**网安备 0008899999xxxx号
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="js/include.js"></script>
+    <script type="text/javascript" src="js/lunbotu.js"></script>
+    <script type="text/javascript" src="js/zturn.js"></script>
+</body>
+</html>

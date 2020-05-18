@@ -1,0 +1,140 @@
+<script src="js/getParameter.js"></script>
+<script>
+    $(function(){
+        $("#exit").css("display","none");
+        $("#login").css("display","block");
+        $.getJSON('user/findSingleUser',{},function(data){
+            var msg = "欢迎回来，" + data.name;
+            $("#span_user").html(msg);
+            var flag = $.isEmptyObject(data);
+            if(!flag){
+                if($("#exit").css("display") == 'none' && $("#login").css("display") == 'block'){
+                    $("#exit").css("display","block");
+                    $("#login").css("display","none");
+                }
+            }
+
+        });
+
+
+        $.getJSON('category/findAll',{},function(data){
+            console.log(data);
+            //首页固定
+            var list = '<li><a href="index.html">首页</a></li>';
+            //遍历data数据，动态拼接list
+            for (var i = 0; i < data.length; i++) {
+                //动态拼接字符串
+                var li = '<li><a href="route_list.html?cid='+ data[i].cid +'">'+ data[i].cname +'</a></li>';
+                //把li拼在list之后
+                list += li;
+            }
+            //收藏排行榜固定
+            list += '<li><a href="tourguide.html">旅游管家</a></li>' +
+                '<li><a href="favoriterank.html">收藏排行榜</a></li>';
+            //替换ui中内容
+            $("#header_category").html(list);
+        });
+
+
+
+        $("#search-button").click(function(){
+            var rname = $("#search_input").val();
+            var cid = getParameter("cid");
+            location.href="route_list.html?cid="+ cid +"&rname="+ rname;
+        });
+    });
+
+    /**
+     * 我的收藏按钮
+     */
+    function myFunction(){
+        //先判断用户是否登录
+        $.getJSON("user/findSingleUser",{},function(user){
+            if(user){
+                //用户已登录，跳转到我的收藏页面，
+                location.href = "myfavorite.html?uid=" + user.uid;
+            }else{
+                //用户未登录
+                alert("您还未登录，请前往登录");
+                location.href = "login.html";
+            }
+        });
+    }
+
+    /**
+     * 个人管理
+     */
+    function management(){
+        $.getJSON("user/findSingleUser",{},function(user){
+            if(user){
+                //用户已登录，跳转到我的收藏页面，
+                location.href = "perManage.html?uid=" + user.uid;
+            }else{
+                //用户未登录
+                alert("您还未登录，请前往登录");
+                location.href = "login.html";
+            }
+        });
+    }
+
+    function userExit(){
+        location.href='user/exit';
+        if($("#login").css("display") == 'none'){
+            $("#login").css("display","block");
+            $("#exit").css("display","none");
+        }
+    }
+    //监听回车
+    $("#search_input").bind("keyup", function (e) {
+        if (e.keyCode == 13) {
+            $('#search-button').click();
+        }
+    });
+</script>
+
+<!-- 头部 start -->
+    <header id="header">
+        <div class="top_banner">
+            <!--<img src="images/top_banner.jpg" alt="">-->
+        </div>
+        <div class="shortcut">
+            <!-- 未登录状态  -->
+            <div class="login_out">
+                <a href="login.html" id="login" style="float: left;">登录</a>
+                <a href="register.html" style="display:block;float: left;">注册</a>
+            </div>
+            <!-- 登录状态  -->
+            <div class="login">
+                <span id="span_user"></span>
+                <a href="javascript:void(0);" class="collection" id="myFavorite" onclick="myFunction()">我的收藏</a>
+                <a href="javascript:void(0);" onclick="management()">个人管理</a>
+                <a href="javascript:void(0);" id="exit" onclick="userExit()" style="float: right">退出</a>
+            </div>
+        </div>
+        <div class="header_wrap">
+            <div class="topbar">
+                <a href="javascript:void(0)">
+                    <div class="logo"></div>
+                </a>
+                <div class="search">
+                    <input name="" id="search_input" type="text" placeholder="请输入路线名称" class="search_input" autocomplete="off">
+                    <a href="javascript:;" id="search-button" class="search-button">搜索</a>
+                </div>
+                <div class="hottel">
+                    <div class="hot_pic">
+                        <img src="images/hot_tel.jpg" alt="">
+                    </div>
+                    <div class="hot_tel">
+                        <p class="hot_time">客服热线(9:00-6:00)</p>
+                        <p class="hot_num">155-0360-9387</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 头部 end -->
+     <!-- 首页导航 -->
+    <div class="navitem">
+        <ul id="header_category" class="nav"></ul>
+    </div>
+    

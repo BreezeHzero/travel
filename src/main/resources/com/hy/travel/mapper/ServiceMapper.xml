@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.travel.mapper.ServiceMapper">
+    <select id="findAll" resultType="com.hy.travel.model.Service">
+        SELECT serid, question FROM tab_service
+    </select>
+
+    <select id="findAnswerBySerid" resultType="com.hy.travel.model.Service">
+        SELECT answer FROM tab_service WHERE serid = #{serid}
+    </select>
+</mapper>

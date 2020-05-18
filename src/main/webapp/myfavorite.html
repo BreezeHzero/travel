@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>黑马旅游网-我的收藏</title>
+        <link rel="shortcut icon" href="img/favicon.png">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+        <style>
+           .tab-content .row>div {
+            margin-top: 16px;
+           } 
+           .tab-content {
+            margin-bottom: 36px;
+           }
+       </style>
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/getParameter.js"></script>
+
+        <script>
+            $(function(){
+                var uid = getParameter("uid");//必有uid，没有uid会直接跳到登录
+                load(uid,1);
+            });
+
+            function load(uid,currentPage){
+                var pageSize = 12;
+                $.getJSON("favoriteServlet/pageQuery",{
+                    uid:uid,
+                    currentPage:currentPage,
+                    pageSize:pageSize
+                },function(pb){
+                    if(pb.list.length == 0){
+                        document.getElementById("row_tip").style.display="block";
+                        document.getElementById("pageNum").style.display="none";
+                    }else{
+                        var lis = "";
+                        //遍历总页数，进行分页,
+                        var homePage = '<li class="threeword" style="cursor:pointer;" onclick="load('+ uid +',1)"><a href="javascript:void(0)">首页</a></li>';//第一页
+
+                        var pre = pb.currentPage - 1;
+                        if(pre <= 0){
+                            pre = 1;
+                        }
+                        var prePage = '<li class="threeword" style="cursor:pointer;" onclick="load('+ uid +','+ pre +')"><a href="javascript:void(0)">上一页</a></li>';//上一页
+
+                        lis += homePage;
+                        lis += prePage;
+
+                        //页码条
+                        var begin; //开始
+                        var end;   //结束
+
+                        if(pb.totalPage < 10){
+                            //总页数不够10
+                            begin = 1;
+                            end = pb.totalPage;
+                        }else{
+                            //超过10,仿百度，前5后4
+                            begin = pb.currentPage- 5;
+                            end = pb.currentPage + 4;
+
+                            //第一页时，后面加9，begin为1
+                            if(begin < 1){
+                                begin = 1;
+                                end = begin + 9;
+                            }
+                            if(end > pb.totalPage){
+                                end = pb.totalPage;
+                                begin = end - 9;
+                            }
+                        }
+
+                        //页码li
+                        for (var i = begin; i <= end; i++) {
+                            var li;
+                            //创建页码的单个li标签
+                            if(pb.currentPage == i){
+                                //页码变色
+                                li = '<li class="curPage" style="cursor:pointer;" onclick="load('+ uid +','+ i +')"><a href="javascript:void(0)">'+i+'</a></li>';
+                            }else{
+                                li = '<li style="cursor:pointer;" onclick="load('+ uid +','+ i +')" ><a href="javascript:void(0)">'+i+'</a></li>';
+                            }
+                            lis += li;
+                        }
+
+                        var next = pb.currentPage + 1;
+                        if(next >= pb.totalPage){
+                            next = pb.totalPage;
+                        }
+                        var nextPage = '<li class="threeword" style="cursor:pointer;" onclick="load('+ uid +','+ next +')"><a href="javascript:void(0)">下一页</a></li>';//下一页
+                        var tailPage = '<li class="threeword" style="cursor:pointer;" onclick="load('+ uid +','+ pb.totalPage +')"><a href="javascript:void(0)">尾页</a></li>';  //尾页
+
+                        lis += nextPage;
+                        lis += tailPage;
+
+                        $("#pageNum").html(lis);
+
+
+                        var divs = "";
+                        //展示该用户的收藏列表
+                        for (var i = 0; i < pb.list.length; i++) {
+
+                            var favorite = pb.list[i];
+
+                            var div = '<div class="col-md-3">\n' +
+                                '                                    <a href="route_detail.html?rid='+ favorite.rid +'">\n' +
+                                '                                        <img src="'+ favorite.rimage +'" alt="">\n' +
+                                '                                        <div class="has_border">\n' +
+                                '                                            <h3>' + favorite.rname + '</h3>\n' +
+                                '                                            <div class="price">网付价<em>￥</em><strong>' + favorite.price + '</strong><em>起</em>\n' +
+                                '                                                &nbsp;&nbsp;&nbsp;&nbsp;\n' +
+                                '                                                添加日期：<span>' + favorite.date + '</span></div>\n' +
+                                '                                        </div>\n' +
+                                '                                    </a>\n' +
+                                '                                </div>';
+                            divs += div;
+                        }
+                        $("#row").html(divs);
+                        window.scrollTo(0,0);
+                    }
+                });
+            }
+        </script>
+
+    </head>
+    <body>
+        <!--引入头部-->
+        <div id="header"></div>
+         <!-- 排行榜 start-->
+        <section id="content">            
+            <section class="hemai_jx">
+                <div class="jx_top">
+                    <div class="jx_tit">
+                        <img src="images/icon_5.jpg" alt="">
+                        <span>我的收藏</span>
+                    </div>                    
+                </div>
+                <div class="jx_content">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="row" id="row">
+                             <h3 id="row_tip" style="display: none; margin-left: 20px; text-align:center;">暂无收藏~</h3>
+
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+                <div class="pageNum">
+                    <ul id="pageNum">
+                    </ul>
+                </div>
+            </section>                      
+        </section>
+        <!-- 排行榜 end-->
+    	
+         <!--引入尾部-->
+        <div class="footer-box">
+            <div class="footer-container">
+                <div class="footer-service clearfix">
+                    <div class="footer-service-item footer-icon-001">
+                        <i></i>
+                        <span>专注于旅游产业领域</span>
+                    </div>
+                    <div class="footer-service-item footer-icon-002">
+                        <i></i>
+                        <span>国内资深导游专家</span>
+                    </div>
+                    <div class="footer-service-item footer-icon-003">
+                        <i></i>
+                        <span>一对一热心客服热线</span>
+                    </div>
+                    <div class="footer-service-item footer-icon-004">
+                        <i></i>
+                        <span>数百万用户诚意推荐</span>
+                    </div>
+                </div>
+                <div class="footer-line"></div>
+                <div class="footer-links clearfix">
+                    <dl class="footer-article-item">
+                        <dt>旗下品牌</dt>
+                        <dd>
+                            <a href="https://www.fliggy.com/">飞猪</a>
+                        </dd>
+                        <dd>
+                            <a href="https://www.ctrip.com/">携程</a>
+                        </dd>
+                        <dd>
+                            <a href="https://www.qunar.com">去哪儿</a>
+                        </dd>
+                    </dl>
+                    <dl class="footer-article-item">
+                        <dt>关于我们</dt>
+                        <dd>
+                            <a href="javascript:void(0);">公司介绍</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0);">发展历程</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0);">团队风采</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0);">办公环境</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0);">荣誉资质</a>
+                        </dd>
+                        <dd>
+                            <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">联系我们</a>
+                        </dd>
+                    </dl>
+                    <dl class="footer-article-item">
+                        <dt>精品推荐</dt>
+                        <dd>
+                            <a href="javascript:void(0);">施展旅游</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0);">华山一日</a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:void(0);">全国游</a>
+                        </dd>
+                    </dl>
+                    <dl class="footer-article-item">
+                        <dt>其他</dt>
+                        <dd>
+                            <a href="https://xiaotiancode.top">官方论坛</a>
+                        </dd>
+                        <dd>
+                            <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">服务支持</a>
+                        </dd>
+                        <dd>
+                            <a href="#">电商大会</a>
+                        </dd>
+                        <dd>
+                            <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">投诉建议</a>
+                        </dd>
+                        <dd>
+                            <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">支付方式</a>
+                        </dd>
+                    </dl>
+                    <dl class="footer-contact-item">
+                        <h3>联系我们</h3>
+                        <p>155-0360-9387</p>
+                        <div class="footer-ewm">
+                            <img src="images/wexin.png" alt="">
+                            <p>关注我的微信</p>
+                        </div>
+                    </dl>
+                </div>
+                <div class="footer-friend">
+                    <div class="footer-friend-title">友情链接：</div>
+                    <ul class="footer-friend-title-list clearfix">
+                        <li>
+                            <a href="http://xiaotiancode.top">李创搏的论坛</a>
+                        </li>
+                        <li>
+                            <a href="https://www.baidu.com/">百度</a>
+                        </li>
+                        <li>
+                            <a href="https://blog.csdn.net/">CSDN</a>
+                        </li>
+                        <li>
+                            <a href="http://www.yits003.com">云南旅游社团</a>
+                        </li>
+                        <li>
+                            <a href="https://www.githubs.cn/">github</a>
+                        </li>
+                        <li>
+                            <a href="https://gitee.com">git</a>
+                        </li>
+                        <li>
+                            <a href="http://www.jq22.com">JQuery插件</a>
+                        </li>
+                        <li>
+                            <a href="https://www.runoob.com/">菜鸟教程</a>
+                        </li>
+                        <li>
+                            <a href="https://trade.taobao.com">淘宝</a>
+                        </li>
+                        <li>
+                            <a href="https://www.huaweicloud.com">华为云</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">移动商城购物</a>
+                        </li>
+
+                    </ul>
+                    <a href="javascript:void(0);" class="footer-friend-more">更多 >></a>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2020-2020 (wegotravel.com) 版权所有，并保留所有权利&nbsp;&nbsp;&nbsp;常年法律顾问: （陕西）不管用律师事务所</p>
+                    <p style="margin: auto;">
+                        陕西省宝鸡市胡了路16号看守所&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#">
+                            <img style="margin: auto" src="images/icon-footer.png" alt="">**网安备 0008899999xxxx号
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- 客服部分 -->
+        <div style="right:-230px;" class="contactusdiyou">
+            <div class="hoverbtn">
+                <span>联</span><span>系</span><span>我</span><span>们</span>
+                <img class="hoverimg" src="images/hoverbtnbg.gif" height="9" width="13">
+            </div>
+            <div class="conter">
+                <div class="con1">
+                    <dl class="fn_cle">
+                        <dt><img src="images/tel.png" height="31" width="31"></dt>
+                        <dd class="f1">咨询热线：</dd>
+                        <dd class="f2"><span class="ph_num">155-0360-9387</span></dd>
+                    </dl>
+                </div>
+                <div class="blank0"></div>
+                <div class="qqcall">
+                    <dl class="fn_cle">
+                        <dt><img src="images/zxkfqq.png" height="31" width="31"></dt>
+                        <dd class="f1 f_s14">在线客服：</dd>
+                        <dd class="f2 kefuQQ">
+                            <!--<span>一</span>-->
+                            <a target="_blank" href="tencent://message/?uin=2710950736&Site=qq.cn&Menu=yes"></a>
+                            <!--<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=279801800&site=qq&menu=yes"></a>-->
+                            <a target="_blank" href="ChatMain.html"></a>
+                        </dd>
+                    </dl>
+                    <div class="blank0" style="padding-top: 20px"></div>
+                </div>
+                <div class="blank0"></div>
+                <div class="weixincall">
+                    <dl class="fn_cle">
+                        <dt><img src="images/weixin.png" height="100%" width="100%"></dt>
+                        <dd class="f1">官方微信：</dd>
+                        <dd class="f3"><img src="images/wexin.png" height="100%" width="100%"></dd>
+                    </dl>
+                </div>
+                <div class="blank0"></div>
+                <div class="dytimer">
+                    <span style="font-weight: bold;">公司官网：</span>
+                    <span><a href="http://www.wegotravel.com/">www.wegotravel.com</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="diyoumask" style="height: 2000px;" ></div>
+
+        <!--导入布局js，共享header和footer-->
+        <script type="text/javascript" src="js/include.js"></script>
+        <script type="text/javascript" src="js/kefu_js.js"></script>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+body
+{
+    font-size:11px
+}
+h3
+{
+    margin:0px
+}
+.border{
+    border:solid 1px #ccc;
+    height: 512px;
+}
+.divShow
+{
+    /*border:solid 1px #ccc;*/
+    height:500px;
+    padding:5px;
+    font-size:12px;
+    /*overflow-y:scroll*/
+}
+.divSystem{
+    /*border:solid 1px #ccc;*/
+    float: right;
+    width: 500px;
+    height: 500px;
+    font-family: '微软雅黑';
+    font-size: 26px;
+}
+#divContent{
+    width: 400px;
+}
+#divOnLine{
+    border:solid 1px #ccc;
+}
+#divMain
+{
+    border:solid 5px #ccc
+}
+#divMain .divtop
+{
+    padding:10px
+}
+#divMain .divtop .divL
+{
+    float:left;
+    width:78%
+}
+#divMain .divtop .divR
+{
+    float:right;
+    width:20%
+}
+#divMain .divBot
+{
+    clear:both;
+    padding:10px
+}
+#divMain .divBot .pb
+{
+    padding-bottom:3px
+}
+#divMain .divBot .pl
+{
+    padding-left:12px
+}
+#divMain .divBot .pt
+{
+    padding-top:3px;
+    color:#555
+}
+.clsTip
+{
+    position:absolute;
+    width:160px;
+    text-align:center;
+    font-size:13px;
+    border:solid 1px #cc3300;
+    margin-top:5px;
+    padding:2px;
+    margin-bottom:5px;
+    background-color:#ffe0a3;
+    display:none;
+}
+/*.upload
+{
+display:none;
+}*/
+.txt
+{
+    border:#666 1px solid;
+    padding:2px;
+    margin-right:3px
+}
+.btn
+{
+    border:#666 1px solid;
+    padding:2px;
+    width:135px;
+    height:54px;
+    font-size:16px;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#ffffff, EndColorStr=#ECE9D8)
+}
+
+.footer_nav{
+    margin-top: 21px;
+}
+.footer_nav>li{
+    position: relative;
+    list-style:none;
+}
+.footer_nav>li>a{
+    margin: 0 24px;
+    font-family: 微软雅黑;
+    font-size: 12px;
+    color: #919192;
+    line-height: 29px;
+    out-line: none;
+}
+.footer_nav>li>i{
+    position: absolute;
+    left: 4px;
+    top: 8px;
+}
+.footer_nav>li>i:hover{
+    color: #e0a240;
+}

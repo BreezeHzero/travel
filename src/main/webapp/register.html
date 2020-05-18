@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>说走就走旅游网-注册</title>
+		<link rel="shortcut icon" href="img/favicon.png">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" href="css/register.css">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<!--导入jquery-->
+		<script src="js/jquery-3.3.1.js"></script>
+
+		<script>
+			$(function(){
+                $("#tip_username").css("display","none");
+                $("#tip_password").css("display","none");
+                $("#tip_email").css("display","none");
+                $("#tip_name").css("display","none");
+                $("#tip_telephone").css("display","none");
+                $("#tip_check").css("display","none");
+			});
+			//校验用户名
+			function checkUsername(){
+				//获取用户名值
+				var username = $("#username").val();
+				//定义正则
+				var reg_username = /^[a-zA-Z0-9_-]{4,16}$/;
+				//判断，给出提示
+				var flag = reg_username.test(username);
+				if(flag){
+					//如果合法
+					$("#username").css("border","");
+                    $("#tip_username").css("display","none");
+				}else{
+					//非法
+					$("#username").css("border","1px solid red");
+
+                    if($("#tip_username").css("display") == 'none'){
+                        $("#tip_username").css("display","block");
+                    }
+                    // $("#tip_username").html("<p style='color: red'>请输入4到16位(字母，数字，下划线，减号)</p>");
+
+                }
+				return flag;
+			}
+			//校验密码
+			function checkPassword(){
+			    var password = $("#password").val();
+			    var reg_password = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
+			    var flag = reg_password.test(password);
+			    if(flag){
+			        $("#password").css("border","");
+                    $("#tip_password").css("display","none");
+				}else{
+			        $("#password").css("border","1px solid red");
+                    if($("#tip_password").css("display") == 'none'){
+                        $("#tip_password").css("display","block");
+                    }
+			        // $("#tip_password").html("<p style='color: red'>请输入最少6位(包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符)</p>");
+				}
+				return flag;
+			}
+			//检查邮箱
+			function checkEmail(){
+				var email = $("#email").val();
+				//hy279801800@163.com
+				var reg_email = /^\w+@\w+\.\w+$/;
+				//test判断函数，返回一个boolean的值
+				var flag = reg_email.test(email);
+				if(flag){
+					$("#email").css("border","");
+                    $("#tip_email").css("display","none");
+				}else{
+                    $("#email").css("border","1px solid red");
+                    if($("#tip_email").css("display") == 'none'){
+                        $("#tip_email").css("display","block");
+                    }
+                    // $("#tip_email").html("<p style='color: red'>请输入正确的邮箱</p>");
+                }
+                return flag;
+			}
+			//检查姓名
+			function checkName(){
+				var name = $("#name").val();
+				var reg_name = /^[\u4E00-\u9FA5]{2,4}$/;
+				var flag = reg_name.test(name);
+				if(flag){
+                    $("#name").css("border","");
+                    $("#tip_name").css("display","none");
+				}else{
+                    $("#name").css("border","1px solid red");
+                    if($("#tip_name").css("display") == 'none'){
+                        $("#tip_name").css("display","block");
+                    }
+                    // $("#tip_name").html("<p style='color: red'>请输入您的真实姓名</p>");
+				}
+				return flag;
+			}
+			//检查电话
+			function checkTel(){
+                var telephone = $("#telephone").val();
+                var reg_telephone = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
+                var flag = reg_telephone.test(telephone);
+                if(flag){
+                    $("#telephone").css("border","");
+                    $("#tip_telephone").css("display","none");
+                }else{
+                    $("#telephone").css("border","1px solid red");
+                    if($("#tip_telephone").css("display") == 'none'){
+                        $("#tip_telephone").css("display","block");
+                    }
+                    // $("#tip_telephone").html("<p style='color: red'>请输入正确的手机号</p>");
+                }
+                return flag;
+			}
+			//校验验证码
+            function checkCheck(){
+                var check = $("#check").val();
+                var flag = (check == null || check == '')?false:true;
+                // var reg_check = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
+                if(flag){
+                    $("#check").css("border","");
+                    $("#tip_check").css("display","none");
+                }else{
+                    $("#check").css("border","1px solid red");
+                    if($("#tip_check").css("display") == 'none'){
+                        $("#tip_check").css("display","block");
+                    }
+                    // $("#tip_check").html("<p style='color: red'>验证码不能为空</p>");
+                }
+                return flag;
+            }
+
+			$(function(){
+			    //提交表单时，校验所有的方法
+				$("#registerForm").submit(function () {
+				    if(checkUsername() && checkPassword() && checkEmail() && checkName() && checkTel() && checkCheck()){
+				        $.getJSON("user/regist",{
+				            'username':$("#username").val(),
+							'password':$("#password").val(),
+							'email':$("#email").val(),
+							'name':$("#name").val(),
+							'telephone':$("#telephone").val(),
+							'sex':$("#sex").val(),
+							'birthday':$("#birthday").val(),
+							'check':$("#check").val()
+						},function(data){
+							if(data.flag){
+								//注册成功
+								location.href="register_ok.html";
+							}else{
+								console.log(data.errorMsg);
+                                location.href="error/500.html";
+							}
+						});
+					}
+					//页面跳转
+					return false;
+				    //如果返回值为true，或者没有返回值，表单提交，否则表单提交失败
+                });
+
+                $("#username").blur(checkUsername);
+                $("#password").blur(checkPassword);
+                $("#email").blur(checkEmail);
+                $("#name").blur(checkName);
+                $("#telephone").blur(checkTel);
+                $("#check").blur(checkCheck);
+			})
+
+		</script>
+
+    </head>
+	<body>
+	<!--引入头部-->
+	<div id="header"></div>
+        <!-- 头部 end -->
+    	<div class="rg_layout">
+    		<div class="rg_form clearfix">
+    			<div class="rg_form_left">
+    				<p>新用户注册</p>
+    				<p>USER REGISTER</p>
+    			</div>
+    			<div class="rg_form_center">
+					
+					<!--注册表单-->
+    				<form id="registerForm" action="registUserServlet">
+						<!--提交处理请求的标识符-->
+						<input type="hidden" name="action" value="register">
+    					<table style="margin-top: 25px;">
+    						<tr>
+    							<td class="td_left">
+    								<label for="username">用户名</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="text" id="username" name="username" placeholder="请输入账号">
+    							</td>
+								<td class="td_right tips" id="tip_username">
+									<p style='color: red'>请输入4到16位(字母，数字，下划线，减号)</p>
+								</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="password">密码</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="password" id="password" name="password" placeholder="请输入密码"  autocomplete="off">
+    							</td>
+								<td class="td_right tips" id="tip_password">
+									<p style='color: red'>请输入最少6位(包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符)</p>
+								</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="email">Email</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="text" id="email" name="email" placeholder="请输入Email">
+    							</td>
+								<td class="td_right tips" id="tip_email">
+									<p style='color: red'>请输入正确的邮箱</p>
+								</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="name">姓名</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="text" id="name" name="name" placeholder="请输入真实姓名">
+    							</td>
+								<td class="td_right tips" id="tip_name">
+									<p style='color: red'>请输入您的真实姓名</p>
+								</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="telephone">手机号</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="text" id="telephone" name="telephone" placeholder="请输入您的手机号">
+    							</td>
+								<td class="td_right tips" id="tip_telephone">
+									<p style='color: red'>请输入正确的手机号</p>
+								</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="sex">性别</label>
+    							</td>
+    							<td class="td_right gender">
+    								<input type="radio" id="sex" name="sex" value="男" checked> 男
+    								<input type="radio" name="sex" value="女"> 女
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="birthday">出生日期</label>
+    							</td>
+    							<td class="td_right">
+    								<input type="date" id="birthday" name="birthday" placeholder="年/月/日">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left">
+    								<label for="check">验证码</label>
+    							</td>
+    							<td class="td_right check">
+    								<input type="text" id="check" name="check" class="check" style="margin-left: 8px">
+    								<img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+									<script type="text/javascript">
+										//图片点击事件
+										function changeCheckCode(img) {
+											img.src="checkCode?"+new Date().getTime();
+                                        }
+									</script>
+    							</td>
+								<td class="td_right tips" id="tip_check">
+									<p style='color: red'>验证码不能为空</p>
+								</td>
+    						</tr>
+    						<tr>
+    							<td class="td_left"> 
+    							</td>
+    							<td class="td_right check"> 
+    								<input type="submit" class="submit" value="注册">
+									<span id="msg" style="color: red;"></span>
+    							</td>
+    						</tr>
+    					</table>
+    				</form>
+    			</div>
+    			<div class="rg_form_right">
+    				<p>
+    					已有账号？
+    					<a href="javascript:location.href='login.html';">立即登录</a>
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+        <!--引入尾部-->
+		<div class="footer-box">
+		<div class="footer-container">
+			<div class="footer-service clearfix">
+				<div class="footer-service-item footer-icon-001">
+					<i></i>
+					<span>专注于旅游产业领域</span>
+				</div>
+				<div class="footer-service-item footer-icon-002">
+					<i></i>
+					<span>国内资深导游专家</span>
+				</div>
+				<div class="footer-service-item footer-icon-003">
+					<i></i>
+					<span>一对一热心客服热线</span>
+				</div>
+				<div class="footer-service-item footer-icon-004">
+					<i></i>
+					<span>数百万用户诚意推荐</span>
+				</div>
+			</div>
+			<div class="footer-line"></div>
+			<div class="footer-links clearfix">
+				<dl class="footer-article-item">
+					<dt>旗下品牌</dt>
+					<dd>
+						<a href="https://www.fliggy.com/">飞猪</a>
+					</dd>
+					<dd>
+						<a href="https://www.ctrip.com/">携程</a>
+					</dd>
+					<dd>
+						<a href="https://www.qunar.com">去哪儿</a>
+					</dd>
+				</dl>
+				<dl class="footer-article-item">
+					<dt>关于我们</dt>
+					<dd>
+						<a href="javascript:void(0);">公司介绍</a>
+					</dd>
+					<dd>
+						<a href="javascript:void(0);">发展历程</a>
+					</dd>
+					<dd>
+						<a href="javascript:void(0);">团队风采</a>
+					</dd>
+					<dd>
+						<a href="javascript:void(0);">办公环境</a>
+					</dd>
+					<dd>
+						<a href="javascript:void(0);">荣誉资质</a>
+					</dd>
+					<dd>
+						<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">联系我们</a>
+					</dd>
+				</dl>
+				<dl class="footer-article-item">
+					<dt>精品推荐</dt>
+					<dd>
+						<a href="javascript:void(0);">施展旅游</a>
+					</dd>
+					<dd>
+						<a href="javascript:void(0);">华山一日</a>
+					</dd>
+					<dd>
+						<a href="javascript:void(0);">全国游</a>
+					</dd>
+				</dl>
+				<dl class="footer-article-item">
+					<dt>其他</dt>
+					<dd>
+						<a href="https://xiaotiancode.top">官方论坛</a>
+					</dd>
+					<dd>
+						<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">服务支持</a>
+					</dd>
+					<dd>
+						<a href="#">电商大会</a>
+					</dd>
+					<dd>
+						<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">投诉建议</a>
+					</dd>
+					<dd>
+						<a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">支付方式</a>
+					</dd>
+				</dl>
+				<dl class="footer-contact-item">
+					<h3>联系我们</h3>
+					<p>155-0360-9387</p>
+					<div class="footer-ewm">
+						<img src="images/wexin.png" alt="">
+						<p>关注我的微信</p>
+					</div>
+				</dl>
+			</div>
+			<div class="footer-friend">
+				<div class="footer-friend-title">友情链接：</div>
+				<ul class="footer-friend-title-list clearfix">
+					<li>
+						<a href="http://xiaotiancode.top">李创搏的论坛</a>
+					</li>
+					<li>
+						<a href="https://www.baidu.com/">百度</a>
+					</li>
+					<li>
+						<a href="https://blog.csdn.net/">CSDN</a>
+					</li>
+					<li>
+						<a href="http://www.yits003.com">云南旅游社团</a>
+					</li>
+					<li>
+						<a href="https://www.githubs.cn/">github</a>
+					</li>
+					<li>
+						<a href="https://gitee.com">git</a>
+					</li>
+					<li>
+						<a href="http://www.jq22.com">JQuery插件</a>
+					</li>
+					<li>
+						<a href="https://www.runoob.com/">菜鸟教程</a>
+					</li>
+					<li>
+						<a href="https://trade.taobao.com">淘宝</a>
+					</li>
+					<li>
+						<a href="https://www.huaweicloud.com">华为云</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">移动商城购物</a>
+					</li>
+
+				</ul>
+				<a href="javascript:void(0);" class="footer-friend-more">更多 >></a>
+			</div>
+			<div class="footer-copyright">
+				<p>© 2020-2020 (wegotravel.com) 版权所有，并保留所有权利&nbsp;&nbsp;&nbsp;常年法律顾问: （陕西）不管用律师事务所</p>
+				<p style="margin: auto;">
+					陕西省宝鸡市胡了路16号看守所&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="#">
+						<img style="margin: auto" src="images/icon-footer.png" alt="">**网安备 0008899999xxxx号
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+		<!--导入布局js，共享header和footer-->
+		<script type="text/javascript" src="js/include.js"></script>
+    	
+    </body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>说走就走旅游网</title>
+    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index03.css">
+    <!--热门线路轮播必要样式-->
+    <link rel='stylesheet prefetch' href='css/slick.min.css'>
+    <link rel='stylesheet prefetch' href='css/slick-theme.min.css'>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/scroll.js"></script>
+    <script type="text/javascript" src="js/routes_comments.js"></script>
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        $(function(){
+            //人气旅游
+            $.getJSON("favoriteServlet/hotRecommend",{},function(data){
+                var divs = "";
+                for (var i = 0; i < data.length; i++) {
+                    var rname = data[i].rname.substr(0,30)+"···";
+                    var div = '<div class="col-md-3">\n' +
+                        '                                <a href="route_detail.html?rid='+data[i].rid+'">\n' +
+                        '                                    <img src="'+data[i].rimage+'" alt="">\n' +
+                        '                                    <div class="has_border">\n' +
+                        '                                        <h3>'+rname+'</h3>\n' +
+                        '                                        <div class="price">网付价<em>￥</em><strong>'+data[i].price+'</strong><em>起</em></div>\n' +
+                        '                                    </div>\n' +
+                        '                                </a>\n' +
+                        '                            </div>';
+
+                    divs += div;
+                }
+                $("#row_bz").html(divs);
+            });
+            //最新旅游
+            $.getJSON("route/randomRecommend",{},function(data){
+                var divs = "";
+                for (var i = 0; i < data.length; i++) {
+                    if(i == 4){
+                        break;
+                    }
+                    var rname = data[i].rname.substr(0,30)+"···";
+                    var div = '<div class="col-md-3">\n' +
+                        '                                <a href="route_detail.html?rid='+data[i].rid+'">\n' +
+                        '                                    <img src="'+data[i].rimage+'" alt="">\n' +
+                        '                                    <div class="has_border">\n' +
+                        '                                        <h3>'+rname+'</h3>\n' +
+                        '                                        <div class="price">网付价<em>￥</em><strong>'+data[i].price+'</strong><em>起</em></div>\n' +
+                        '                                    </div>\n' +
+                        '                                </a>\n' +
+                        '                            </div>';
+
+                    divs += div;
+                }
+                $("#row_bz_2").html(divs);
+            });
+            //主题旅游randomSelect_theme
+            $.getJSON("route/randomSelect_theme",{},function(data){
+                var divs = "";
+                for (var i = 0; i < data.length; i++) {
+                    if(i == 4){
+                        break;
+                    }
+                    var rname = data[i].rname.substr(0,30)+"···";
+                    var div = '<div class="col-md-3">\n' +
+                        '                                <a href="route_detail.html?rid='+data[i].rid+'">\n' +
+                        '                                    <img src="'+data[i].rimage+'" alt="">\n' +
+                        '                                    <div class="has_border">\n' +
+                        '                                        <h3>'+rname+'</h3>\n' +
+                        '                                        <div class="price">网付价<em>￥</em><strong>'+data[i].price+'</strong><em>起</em></div>\n' +
+                        '                                    </div>\n' +
+                        '                                </a>\n' +
+                        '                            </div>';
+
+                    divs += div;
+                }
+                $("#row_bz_3").html(divs);
+            });
+            //国内
+            $.getJSON("route/randomRecommend",{},function(data){
+                var divs = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    var rname = data[i].rname.substr(0,30)+"···";
+                    var div = '<div class="col-md-4">\n' +
+                        '<a href="route_detail.html?rid='+data[i].rid+'">\n' +
+                        '<img src="'+data[i].rimage+'" alt="">\n' +
+                        '<div class="has_border">\n' +
+                        '<h3>'+rname+'</h3>\n' +
+                        '<div class="price">网付价<em>￥</em><strong>'+data[i].price+'</strong><em>起</em></div>\n' +
+                        '</div>\n' +
+                        '</a>\n' +
+                        '</div>';
+
+                    divs += div;
+                }
+                $("#row_guonei").html(divs);
+            });
+            //特价游
+            $.getJSON("route/randomCheapTravel",{},function(data){
+                var divs = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    var rname = data[i].rname.substr(0,30)+"···";
+                    var div = '<div class="col-md-4">\n' +
+                        '<a href="route_detail.html?rid='+data[i].rid+'">\n' +
+                        '<img src="'+data[i].rimage+'" alt="">\n' +
+                        '<div class="has_border">\n' +
+                        '<h3>'+rname+'</h3>\n' +
+                        '<div class="price">网付价<em>￥</em><strong>'+data[i].price+'</strong><em>起</em></div>\n' +
+                        '</div>\n' +
+                        '</a>\n' +
+                        '                        </div>';
+
+                    divs += div;
+                }
+                $("#row_tejia").html(divs);
+            });
+        });
+    </script>
+</head>
+<body>
+	<!--引入头部-->
+    <div id="header"></div>
+    <!-- banner start-->
+    <section id="banner">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="2000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img width="100%" src="images/banner_1.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img width="100%" src="images/banner_2.jpg" alt="">
+                </div>
+                <div class="item">
+                    <img width="100%" src="images/banner_3.jpg" alt="">
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			  </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			  </a>
+        </div>
+    </section>
+    <!-- banner end-->
+    <!-- 旅游 start-->
+    <section id="content">
+         <!-- 本站精选start-->
+        <section class="hemai_jx">
+            <div class="jx_top">
+                <div class="jx_tit">
+                    <img src="images/icon_5.jpg" alt="">
+                    <span>本站精选</span>
+                </div>
+                <!-- Nav tabs -->
+                <ul class="jx_tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <span></span>
+                        <a href="#popularity" aria-controls="popularity" role="tab" data-toggle="tab">人气旅游</a>
+                    </li>
+                    <li role="presentation">
+                        <span></span>
+                        <a href="#newest" aria-controls="newest" role="tab" data-toggle="tab">最新旅游</a>
+                    </li>
+                    <li role="presentation">
+                        <span></span>
+                        <a href="#theme" aria-controls="theme" role="tab" data-toggle="tab">主题旅游</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="jx_content">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="popularity">
+                        <div class="row" id="row_bz">
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="newest">
+                        <div class="row" id="row_bz_2">
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="theme">
+                        <div class="row" id="row_bz_3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 本站精选end-->
+        <!-- 国内游 start-->
+        <section class="hemai_jx">
+            <div class="jx_top">
+                <div class="jx_tit">
+                    <img src="images/icon_6.jpg" alt="">
+                    <span>国内游</span>
+                </div>
+            </div>
+            <div class="heima_gn">
+                <div class="guonei_l">
+                    <img src="images/guonei_1.jpg" alt="">
+                </div>
+                <div class="guone_r">
+                    <div class="row" id="row_guonei">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 国内游 end-->
+        <!-- 特价游 start-->
+        <section class="hemai_jx">
+            <div class="jx_top">
+                <div class="jx_tit">
+                    <img src="images/icon_7.jpg" alt="">
+                    <span>特价游</span>
+                </div>
+            </div>
+            <div class="heima_gn">
+                <div class="guonei_l">
+                    <img src="images/jiangwai_1.jpg" alt="">
+                </div>
+                <div class="guone_r">
+                    <div class="row" id="row_tejia">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 特价游 end-->
+    </section>
+
+    <!--热门路线-->
+    <div class="line_comm">
+        <span class="fl">-热门路线-</span>
+        <div class="box_line">
+            <div class="fl">
+                <div class="a_line fl"></div>
+                <div class="a_box fl"></div>
+                <div class="a_line fl"></div>
+            </div>
+        </div>
+    </div>
+    <div id="hot_routes">
+        <div class="hot_routes_main">
+            <div class="slider">
+                <div class="item">
+                </div>
+                <div class="item">
+                </div>
+                <div class="item">
+                </div>
+                <div class="item">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="line_comm">
+        <span class="fl">-客人评价-</span>
+        <div class="box_line">
+            <div class="fl">
+                <div class="a_line fl"></div>
+                <div class="a_box fl"></div>
+                <div class="a_line fl"></div>
+            </div>
+        </div>
+    </div>
+    <!--客人评论-->
+    <div id="hot_comments">
+        <div class="myscroll">
+            <ul id="allComm">
+            </ul>
+        </div>
+    </div>
+
+    <!-- 旅游 end-->
+    <!--导入底部-->
+    <!--<div id="footer"></div>-->
+    <div class="footer-box">
+        <div class="footer-container">
+            <div class="footer-service clearfix">
+                <div class="footer-service-item footer-icon-001">
+                    <i></i>
+                    <span>专注于旅游产业领域</span>
+                </div>
+                <div class="footer-service-item footer-icon-002">
+                    <i></i>
+                    <span>国内资深导游专家</span>
+                </div>
+                <div class="footer-service-item footer-icon-003">
+                    <i></i>
+                    <span>一对一热心客服热线</span>
+                </div>
+                <div class="footer-service-item footer-icon-004">
+                    <i></i>
+                    <span>数百万用户诚意推荐</span>
+                </div>
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-links clearfix">
+                <dl class="footer-article-item">
+                    <dt>旗下品牌</dt>
+                    <dd>
+                        <a href="https://www.fliggy.com/">飞猪</a>
+                    </dd>
+                    <dd>
+                        <a href="https://www.ctrip.com/">携程</a>
+                    </dd>
+                    <dd>
+                        <a href="https://www.qunar.com">去哪儿</a>
+                    </dd>
+                </dl>
+                <dl class="footer-article-item">
+                    <dt>关于我们</dt>
+                    <dd>
+                        <a href="javascript:void(0);">公司介绍</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">发展历程</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">团队风采</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">办公环境</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">荣誉资质</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">联系我们</a>
+                    </dd>
+                </dl>
+                <dl class="footer-article-item">
+                    <dt>精品推荐</dt>
+                    <dd>
+                        <a href="javascript:void(0);">施展旅游</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">华山一日</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:void(0);">全国游</a>
+                    </dd>
+                </dl>
+                <dl class="footer-article-item">
+                    <dt>其他</dt>
+                    <dd>
+                        <a href="https://xiaotiancode.top">官方论坛</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">服务支持</a>
+                    </dd>
+                    <dd>
+                        <a href="#">电商大会</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">投诉建议</a>
+                    </dd>
+                    <dd>
+                        <a href="tencent://message/?uin=279801800&Site=qq.cn&Menu=yes">支付方式</a>
+                    </dd>
+                </dl>
+                <dl class="footer-contact-item">
+                    <h3>联系我们</h3>
+                    <p>155-0360-9387</p>
+                    <div class="footer-ewm">
+                        <img src="images/wexin.png" alt="">
+                        <p>关注我的微信</p>
+                    </div>
+                </dl>
+            </div>
+            <div class="footer-friend">
+                <div class="footer-friend-title">友情链接：</div>
+                <ul class="footer-friend-title-list clearfix">
+                    <li>
+                        <a href="http://xiaotiancode.top">李创搏的论坛</a>
+                    </li>
+                    <li>
+                        <a href="https://www.baidu.com/">百度</a>
+                    </li>
+                    <li>
+                        <a href="https://blog.csdn.net/">CSDN</a>
+                    </li>
+                    <li>
+                        <a href="http://www.yits003.com">云南旅游社团</a>
+                    </li>
+                    <li>
+                        <a href="https://www.githubs.cn/">github</a>
+                    </li>
+                    <li>
+                        <a href="https://gitee.com">git</a>
+                    </li>
+                    <li>
+                        <a href="http://www.jq22.com">JQuery插件</a>
+                    </li>
+                    <li>
+                        <a href="https://www.runoob.com/">菜鸟教程</a>
+                    </li>
+                    <li>
+                        <a href="https://trade.taobao.com">淘宝</a>
+                    </li>
+                    <li>
+                        <a href="https://www.huaweicloud.com">华为云</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">移动商城购物</a>
+                    </li>
+
+                </ul>
+                <a href="javascript:void(0);" class="footer-friend-more">更多 >></a>
+            </div>
+            <div class="footer-copyright">
+                <p>© 2020-2020 (wegotravel.com) 版权所有，并保留所有权利&nbsp;&nbsp;&nbsp;常年法律顾问: （陕西）不管用律师事务所</p>
+                <p style="margin: auto;">
+                    陕西省宝鸡市胡了路16号看守所&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#">
+                        <img style="margin: auto" src="images/icon-footer.png" alt="">**网安备 0008899999xxxx号
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!--返回顶部-->
+    <div class="toTop">
+        <div class="toTop-label"></div>
+    </div>
+
+    <!-- 客服部分 -->
+    <div style="right:-230px;" class="contactusdiyou">
+        <div class="hoverbtn">
+            <span>联</span><span>系</span><span>我</span><span>们</span>
+            <img class="hoverimg" src="images/hoverbtnbg.gif" height="9" width="13">
+        </div>
+        <div class="conter">
+            <div class="con1">
+                <dl class="fn_cle">
+                    <dt><img src="images/tel.png" height="31" width="31"></dt>
+                    <dd class="f1">咨询热线：</dd>
+                    <dd class="f2"><span class="ph_num">155-0360-9387</span></dd>
+                </dl>
+            </div>
+            <div class="blank0"></div>
+            <div class="qqcall">
+                <dl class="fn_cle">
+                    <dt><img src="images/zxkfqq.png" height="31" width="31"></dt>
+                    <dd class="f1 f_s14">在线客服：</dd>
+                    <dd class="f2 kefuQQ">
+                        <!--<span>一</span>-->
+                        <a target="_blank" href="tencent://message/?uin=2710950736&Site=qq.cn&Menu=yes"></a>
+                        <!--<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=279801800&site=qq&menu=yes"></a>-->
+                        <a target="_blank" href="ChatMain.html"></a>
+                    </dd>
+                </dl>
+                <div class="blank0" style="padding-top: 20px"></div>
+            </div>
+            <div class="blank0"></div>
+            <div class="weixincall">
+                <dl class="fn_cle">
+                    <dt><img src="images/weixin.png" height="100%" width="100%"></dt>
+                    <dd class="f1">官方微信：</dd>
+                    <dd class="f3"><img src="images/wexin.png" height="100%" width="100%"></dd>
+                </dl>
+            </div>
+            <div class="blank0"></div>
+            <div class="dytimer">
+                <span style="font-weight: bold;">公司官网：</span>
+                <span><a href="http://www.wegotravel.com/">www.wegotravel.com</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="diyoumask" style="height: 2000px;" ></div>
+    <!--<script src="js/jquery-3.3.1.js"></script>-->
+    <script src="js/bootstrap.min.js"></script>
+    <!--导入布局js，共享header和footer-->
+    <script type="text/javascript" src="js/include.js"></script>
+    <script type="text/javascript" src="js/kefu_js.js"></script>
+
+
+
+    <!--插件-->
+    <!--<script type="text/javascript" src="js/scroll.js"></script>-->
+    <!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+    <script type="text/javascript" src='js/jquery.easing.min.js'></script>
+    <script type="text/javascript" src='js/slick.min.js'></script>
+    <script type="text/javascript">
+        $(window).scroll(function(){//滚动条监控
+            var this_scrollTop = $(this).scrollTop();
+            if(this_scrollTop>500){
+                $('.toTop').show();
+            }else{
+                $('.toTop').hide();
+            }
+        });
+        var speed=500;//滑动的速度
+        $(".toTop").click(function(){//返回顶部
+            $('body,html').animate({ scrollTop: 0 }, speed);
+            return false;
+        });
+        $(function(){
+            $('.myscroll').myScroll({
+                speed: 60, //数值越大，速度越慢
+                rowHeight: 126 //li的高度
+            });
+        });
+
+        $('.slider').slick({
+            autoplay:true,
+            autoplaySpeed:3000,
+            draggable: true,
+            arrows: true,
+            dots: true,
+            fade: true,
+            speed: 900,
+            infinite: true,
+            cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+            touchThreshold: 100
+        });
+    </script>
+</body>
+</html>

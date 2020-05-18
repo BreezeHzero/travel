@@ -1,0 +1,92 @@
+@charset "utf-8";
+* { outline:none; }
+body{margin:0; padding:30px; width:980px; color:#353535; font-size:12px; font-family:'Microsoft Yahei', '微软雅黑', arial, 'Hiragino Sans GB', '宋体', \5b8b\4f53; }
+.iDo-cl:before,.iDo-cl:after {content:"";display:table;}
+.iDo-cl:after { clear:both; }/* For IE 6/7 (trigger hasLayout) */
+.iDo-cl { zoom:1; }
+label { cursor:pointer; }
+
+.iDo-list-ul { list-style:none; margin:0; padding:0; width:698px; border:1px solid #e5e5e5; }
+
+.iDo-list-li,.iDo-list-li-title {overflow:hidden; border-bottom:1px solid #e5e5e5; height:35px; _margin-bottom:-4px; }
+.iDo-list-li div,.iDo-list-li-title div { float:left; display:block; height:35px; line-height:35px; _line-height:37px; border-right:1px solid #e5e5e5; } 
+
+
+.iDo-main { float:left; overflow:hidden; }
+.iDo-side { float:right; }
+
+
+
+.iDo-list-li-d1 { width:61px; text-align:center; }
+.iDo-list-li-d1 .iDoformCheckboxWrapper { width:13px; margin:11px 23.5px; _margin:11px 12px;  }
+.iDo-list-li-title .iDo-list-li-d1 { width:61px; text-align:center; line-height:35px; padding:0px; _padding-top:1px; }
+.iDo-list-li-d2 { width:278px; text-indent:10px; }
+.iDo-list-li-d3 { width:175px; text-align:center; }
+.iDo-list-li-d4 { width:80px; text-align:center; }
+.iDo-list-li .iDo-list-li-d5,.iDo-list-li-title .iDo-list-li-d5 { width:100px; text-align:center; border-right:0px; }
+.iDo-list-li-count { border-bottom:0px; height:50px; line-height:50px; _line-height:55px; padding:10px 20px; overflow:hidden; }
+.iDo-list-li-count span { font-size: 28px;color: #58a41d; line-height:50px; float:right; font-weight:bold; height:50px; }
+.iDo-list-li-count em { font-size:14px; font-weight:bold; float:right; font-style:normal; margin-right:10px; }
+.iDo-list-li-count i { font-style:normal; float:left; }
+.iDo-list-li-count .iDo-info-tips { height:inherit; }
+
+.iDo-info-p { height:45px; margin:0px; }
+.iDo-info-title { width:80px; display:inline-block; text-align:right; margin-right:10px; font-size:13px; height:29px; line-height:29px; _line-height:29px; float:left; }
+.iDo-info-box { float:left; overflow:hidden; height:29px; }
+.iDo-info-tips { float:left; overflow:hidden; height:29px; }
+.iDo-info-box b { float:left; width:23px; _width:15px; height:29px; line-height:29px; text-align:center; }
+.iDo-info-p i { font-style:normal; margin-left:10px; height:29px; line-height:29px; }
+.iDo-info-p i em { font-style:normal; display:inline-block; width:10px; font-family: "宋体"; color:#c40000; }
+
+.iDo-basic { padding:40px 0px 0px 20px; }
+.iDo-details { border-top:1px dashed #c6c6c6; border-bottom:1px dashed #c6c6c6; padding:20px 0px 20px 20px; margin:30px 0px; }
+.iDo-details .iDo-pay { display:inline-block; overflow:hidden; cursor:pointer; }
+.iDo-details .iDo-pay .iDoformRadioWrapper { margin:8.5px; }
+.iDo-details .iDo-pay label { float:left; font-size:13px; background-image:url(../images/pay-ico.png); background-repeat:no-repeat; height:29px; line-height:29px; overflow:hidden; padding:0 20px 0 26px; }
+.iDo-info-select { overflow:visible; }
+.iDo-pay-1 { background-position:00px 1px; float:left; color:#40a545; }
+.iDo-pay-2 { background-position:00px -24px; color:#ff7321; }
+.iDo-pay-3 { background-position:00px -50px; color:#006abf; }
+
+.txt-len-1 { width:350px; }
+.txt-len-2 { width:40px; }
+.txt-len-3 { width:285px; }
+.txt-len-4 { width:85px; _width:93px; margin-right:5px; }
+.txt-len-5 { width:80px; margin-right:5px; }
+.txt-len-6 { width:80px; margin-right:0px; }
+.txt-len-7 { width:500px; }
+.txt-len-8 { width:50px; }
+
+.iDo-sc { width:10px; height:29px; float:left; }
+
+
+.iDo-side { border:1px solid #e5e5e5; width:270px; }
+.iDo-side-bg { background:url(../images/side-bg.png) repeat-x center bottom; border-bottom:1px dotted #e5e5e5; }
+.iDo-side-icon { background:url(../images/side-ico.png) no-repeat; overflow:hidden; }
+.iDo-side-tel { height:80px; }
+.iDo-side-hours { height:80px; }
+.iDo-side-tips { border-bottom:1px dotted #e5e5e5; }
+.iDo-side-btn { border-bottom:1px dotted #e5e5e5; }
+
+.iDo-side-tel .iDo-side-icon { height:80px; background-position:0px 0px; }
+.iDo-side-tel .iDo-side-icon span { display:block; margin:15px 0 0 75px; font-size:14px; }
+.iDo-side-tel .iDo-side-icon strong { font-family:Impact, "Arial Black", sans-serif; font-size:24px; margin:0 0 0 75px; letter-spacing:-1px; }
+
+.iDo-side-hours .iDo-side-icon { height:80px; background-position:0px -80px; }
+.iDo-side-hours .iDo-side-icon span { display:block; margin:17px 0 0 75px; font-size:16px; font-weight:bold; }
+.iDo-side-hours .iDo-side-icon strong { font-size:18px; font-weight:normal; margin:0 0 0 75px; }
+
+.iDo-side-tips .iDo-side-icon { height:25px; background-position:-5px -189px; font-size:16px; font-weight:bold; text-indent:50px; margin-top:15px; padding-bottom:10px; border-bottom:1px dotted #e5e5e5; }
+.iDo-side-tips .iDo-side-tips-contents { margin: 15px 25px; line-height:22px; padding-bottom:10px; }
+
+.iDo-side-btn a { width:166px; height:46px; display:block; margin:30px auto; background:url(../images/btn.png); }
+
+
+.iDo-side-sale .iDo-side-icon { height:25px; background-position:-5px -269px; font-size:16px; font-weight:bold; text-indent:50px; margin-top:15px; padding-bottom:10px; border-bottom:1px dotted #e5e5e5; }
+.iDo-side-sale ul { margin:0; padding:0;}
+.iDo-side-sale li { list-style:none; margin:25px; border:1px solid #eee; }
+.iDo-side-sale li .iDo-side-sale-t { background:#fafafa; padding:10px; overflow:hidden; border-bottom:1px solid #eee; }
+.iDo-side-sale li .iDo-side-sale-c { padding:10px; overflow:hidden; border-bottom:1px solid #eee; }
+.iDo-side-sale li .iDo-side-sale-b { background:#fafafa; padding:10px; overflow:hidden; }
+.iDo-side-sale li span { float:left; }
+.iDo-side-sale li em { float:right; font-style:normal; }

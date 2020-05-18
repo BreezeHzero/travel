@@ -1,0 +1,270 @@
+.Validform_wrong{ color:#c40000; }
+.Validform_right{ color:#0EAB25; }
+form.iDoformdone label{
+	margin-top:4px;
+	margin-right: 8px;
+	display: block;
+	float:left;
+}
+form.iDoformdone div.rowElem{
+	clear:both;
+	padding:4px 0px;
+}
+/* -------------
+ * Buttons
+ * ------------- */
+button.iDoformButton {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	background:#fff;
+	border:1px solid #c6c6c6;
+	width:180px;
+	height:50px;
+	cursor: pointer;
+	overflow: visible;
+	font-family: Arial;
+}
+
+*:first-child+html button.iDoformButton[type]{width: 1;} /* IE7 */
+
+/*hover*/
+button.iDoformButton_hover span span { background-position: left -33px ; }
+button.iDoformButton_hover span { background-position: right -33px ; }
+
+/*clicked*/
+button.iDoformButton_click span span { background-position: left -66px ; }
+button.iDoformButton_click span { background-position: right -66px ; }
+
+/* IE 6 */
+* html button.iDoformButton { height:33px; }
+* button.iDoformButton span span { height: 25px; }
+/* IE 7 */
+*+ html button.iDoformButton { height:33px; }
+*+ button.iDoformButton span span { height: 25px; }
+
+
+/* -------------
+ * Inputs
+ * ------------- */
+.iDoformInputWrapper {
+	border:1px solid #c6c6c6;
+	height: 27px;
+	padding: 0px;
+	float:left;
+}
+
+.iDoformInputInner {
+	padding: 0px;
+	margin: 0px;
+}
+
+.iDoformInputInner div {
+	height: 27px;
+	margin:0px;
+}
+
+.iDoformInputInner div input {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	line-height: 17px;
+	vertical-align: middle;
+	height: 17px;
+	color:#404040;	
+	border: none;
+	padding:0px;
+	margin: 0px;
+	background:transparent;
+}
+
+/*  IE6 */
+* html .iDoformInputInner div input {
+	padding: 4px;
+	margin: 0 0 0 0px;
+	height:17px;
+}
+/* Ie7 */
+*+ html .iDoformInputInner div input {
+	padding: 6px 0 0 0;
+	margin-left:-10px;
+	height:24px;
+}
+
+.iDoformSafari .iDoformInputInner div {
+	position: relative;
+	overflow: hidden;
+	margin:0px;
+}
+.iDoformSafari .iDoformInputInner div input {
+	background-color: none;
+	position: absolute;
+	height: 17px; 
+	padding:5px;
+}
+
+
+
+/* -------------
+ * Textarea
+ * ------------- */
+table.iDoformTextarea td#jqTransformTextarea-mm textarea{
+	font-size: 12px;
+	line-height: 16px;
+}
+
+table.iDoformTextarea td{
+font-size: 1px;
+line-height: 1px;
+width: 5px;
+height: 5px;
+margin: 0;
+padding: 0;
+}
+table.iDoformTextarea{}
+table.iDoformTextarea tr{
+/*border: 1px solid red;*/
+
+}
+table.iDoformTextarea textarea{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+}
+
+
+table.iDoformTextarea .iDoformSafariTextarea div {
+	position: relative;
+	overflow: hidden;
+	border: 0px solid red;
+}
+table.iDoformTextarea .iDoformSafariTextarea textarea{
+	background: none;
+	position: absolute;
+	top:-10px;
+	left:-10px;
+	padding: 10px 10px 10px 10px;
+	resize: none;
+}
+
+
+/* -------------
+ * Radios
+ * ------------- */
+.iDoformRadioWrapper {float: left;display:block;margin:0px 4px;	margin-top:5px;}
+.iDoformRadio {
+	background: transparent url(../images/form/radio.gif) no-repeat center top;
+	vertical-align: middle;
+	font-size:1px;
+	height: 12px;
+	width: 12px;
+	display:block;/*display: -moz-inline-block;*/
+}
+
+
+/* -------------
+ * Checkboxes
+ * ------------- */
+span.iDoformCheckboxWrapper{
+	display:block;float:left;
+	margin-top:5px;
+}
+a.iDoformCheckbox {
+	background: transparent url(../images/form/checkbox.gif) no-repeat center top;
+	vertical-align: middle;
+	font-size:1px;
+	height: 13px;
+	width: 13px;
+	display:block;/*display: -moz-inline-block;*/
+}
+
+/* -------------
+ * Checked - Used for both Radio and Checkbox
+ * ------------- */
+a.iDoformChecked { background-position: center bottom;}
+
+
+/* -------------
+ * Selects
+ * ------------- */
+.iDoformSelectWrapper {
+	width: 45px;
+	position:relative;
+	height: 27px;
+	border:1px solid #c6c6c6;
+	float:left;
+}
+
+.iDoformSelectWrapper div span {
+	
+	font-size: 12px;
+	float: none;
+	position: absolute;
+	white-space: nowrap;
+	height: 17px;
+	padding:5px;
+	line-height: 17px;
+	overflow: hidden;
+	cursor:pointer;
+	/*border: 1px solid #CCCCCC;*/
+/*	border-right: none;*/
+}
+
+.iDoformSelectWrapper  a.iDoformSelectOpen {
+	display: block;
+	position: absolute;
+	right: 0px;
+	width: 27px;
+	height: 27px;
+	background: url(../images/form/select_right.gif) no-repeat center center;
+}
+
+.iDoformSelectWrapper ul {
+	position: absolute;
+	width: 43px;
+	top: 27px;
+	left: -1px;
+	list-style: none;
+	background-color: #FFF;
+	border: solid 1px #C6C6C6;
+	display: none;
+	margin: 0px;
+	padding: 0px;
+	height: 150px;
+	overflow: auto;
+	overflow-y: auto;
+	z-index:10;
+}
+
+.iDoformSelectWrapper ul a {
+	display: block;
+	padding: 5px;
+	text-decoration: none;
+	color:#333;
+	background-color: #FFF;
+	font-size: 12px;
+}
+
+.iDoformSelectWrapper ul a.selected {
+	background: #EDEDED;
+	color: #333;
+}
+
+.iDoformSelectWrapper ul a:hover, .iDoformSelectWrapper ul a.selected:hover {
+	background:#3582c4;
+	color: #fff;
+}
+
+/* -------------
+ * Hidden - used to hide the original form elements
+ * ------------- */
+.iDoformHidden {display: none;}
+
+.Spinner{display:block;overflow:hidden;width:58px;margin:9px auto;}
+.Spinner .Amount{width:14px;height:7px;padding:4px 5px;line-height:7px;font-size:11px;border-width:1px 0;border-style:solid;border-color:#d9d9d9;float:left;text-align:center;color:#565656;outline:0;}
+.Spinner a{display:inline-block;width:15px;height:15px;border:1px solid #d9d9d9;background-color:#f7f7f7;float:left;cursor:pointer;outline:0;}
+.Spinner a i{font-style:normal;background:url(../images/form/BuynBtn.png) no-repeat;display:block;width:9px;height:9px;margin:3px;text-indent:999999%;overflow:hidden;}
+.Spinner .Decrease i{background-position:-9px -9px;}
+.Spinner .Increase i{background-position:-9px -0px;}
+.Spinner .DisDe i{background-position:-0px -9px;}
+.Spinner .DisIn i{background-position:-0px -0px;}

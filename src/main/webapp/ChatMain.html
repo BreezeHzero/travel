@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客服咨询</title>
+    <link rel="shortcut icon" href="img/favicon.png">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jsmain.js"></script>
+    <link rel="stylesheet" href="css/chatmain.css"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<body>
+    <div id="divMain">
+        <div class="divtop">
+            <div class="divL">
+                <h3>Here Wo Go共享聊天室</h3>
+                <div class="border">
+                    <div class="divShow" id="divContent" style="float: left"></div>
+                    <div class="divSystem" id="divAnswer"></div>
+                </div>
+            </div>
+            <div class="divR">
+                <h3>你想咨询？</h3>
+                <div class="divShow" id="divOnLine">
+                    <ul class="footer_nav">
+                        <li><i class="fa fa-angle-right"></i><a href="#">是否有专门导游？</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="#">该网站是否合法？</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="#">站长是谁？</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="#">学号多少？</a></li>
+                        <li><i class="fa fa-angle-right"></i><a href="#">付款后多久能享受服务？</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="divBot">
+            <table cellpadding="0" cellspacing="0">
+                <tr><td colspan="2" id="divFace" class="pb"></td></tr><tr><td>
+                <textarea id="txtContent" cols="64" rows="3" class="txt"></textarea></td><td class="pl">
+                <input id="Button1" type="button" value="发送" class="btn"/>
+                <input id="Button2" type="button" value="退出" class="btn"/>
+
+            </td></tr><tr><td colspan="2" class="pt">发送内容不能为空</td></tr></table>
+        </div>
+        <!--<span id="divMsg" class="clsTip">正在发送数据…</span>-->
+
+    </div>
+</body>
+</html>

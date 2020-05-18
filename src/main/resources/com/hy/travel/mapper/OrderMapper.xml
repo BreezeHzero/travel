@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.travel.mapper.OrderMapper">
+    <insert id="insertOrder" parameterType="com.hy.travel.model.Order">
+        INSERT INTO tab_order VALUES(#{oid},#{uid},#{rid},CURRENT_TIMESTAMP(6),#{order_num},#{comments},#{tid})
+    </insert>
+
+    <select id="findUidByRid" resultType="com.hy.travel.model.Order">
+        SELECT uid FROM tab_order WHERE rid = #{rid}
+    </select>
+
+    <select id="findHaveBuyByUid" resultType="com.hy.travel.model.Route">
+        SELECT tab_route.`rid`, rname,price,routeIntroduce,rimage,comments
+        FROM tab_route
+        LEFT JOIN tab_order
+        ON tab_route.`rid` = tab_order.`rid`
+        WHERE tab_order.`uid` = #{uid}
+    </select>
+
+    <update id="insertComments" parameterType="com.hy.travel.model.Order">
+        UPDATE tab_order SET comments= #{comments} WHERE uid = #{uid} AND rid = #{rid}
+    </update>
+
+    <select id="allComments" resultType="com.hy.travel.model.Order">
+        SELECT username,comments
+        FROM tab_order
+        LEFT JOIN tab_user
+        ON tab_order.`uid` = tab_user.`uid`
+        WHERE rid = #{rid}
+    </select>
+
+    <select id="findCommentByUidAndRid" resultType="com.hy.travel.model.Order">
+        SELECT comments FROM tab_order WHERE uid = #{uid} AND rid = #{rid}
+    </select>
+
+    <select id="countComments" resultType="int">
+        SELECT COUNT(*) FROM tab_order WHERE rid = #{rid}
+    </select>
+
+    <select id="findAll" resultType="com.hy.travel.model.Order">
+        SELECT t_u.username, t_o.rid, t_r.`rname`, t_o.comments
+        FROM tab_order AS t_o
+        LEFT JOIN tab_route AS t_r
+        ON t_o.`rid` = t_r.`rid`
+        LEFT JOIN tab_user AS t_u
+        ON t_o.`uid` = t_u.`uid`
+    </select>
+
+    <!--只找出12条就够了-->
+    <select id="findCountOfEveryRoute" resultType="com.hy.travel.model.Order">
+        SELECT t_o.`rid`,t_r.`rname`,t_r.`price`,t_r.`rimage`,COUNT(t_o.rid) ordernum
+        FROM tab_order AS t_o
+        RIGHT JOIN tab_route AS t_r
+        ON t_r.`rid` = t_o.`rid`
+        GROUP BY t_o.`rid`
+        ORDER BY ordernum DESC
+        LIMIT 0,12
+    </select>
+
+    <select id="findOrder_num" resultType="com.hy.travel.model.Order">
+        SELECT order_num FROM tab_order WHERE uid = #{uid} AND rid = #{rid}
+    </select>
+
+    <select id="findOid" resultType="com.hy.travel.model.Order">
+        SELECT oid FROM tab_order WHERE order_num = #{order_num}
+    </select>
+</mapper>
